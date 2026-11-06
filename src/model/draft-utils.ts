@@ -230,7 +230,7 @@ export async function insertDraftIntoFrontmatter(
     });
   } catch (error) {
     console.error(
-      "[Longform] insertDraftIntoFrontmatter: processFrontMatter error:",
+      "[Scriptorium] insertDraftIntoFrontmatter: processFrontMatter error:",
       error
     );
   }

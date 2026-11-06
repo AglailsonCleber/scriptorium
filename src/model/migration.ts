@@ -5,23 +5,23 @@ import { insertDraftIntoFrontmatter } from "./draft-utils";
 import { pluginSettings } from "./stores";
 import {
   LONGFORM_CURRENT_PLUGIN_DATA_VERSION,
-  type LongformPluginSettings,
+  type ScriptoriumPluginSettings,
   type MultipleSceneDraft,
 } from "./types";
 
 const INDEX_MIGRATION_NOTICE =
-  "\n\nThis is a Longform 1.0 Index File, and the project it corresponded to has since been migrated. It has been marked as to-be-ignored in the new project and can be safely deleted.";
+  "\n\nThis is a Scriptorium 1.0 Index File, and the project it corresponded to has since been migrated. It has been marked as to-be-ignored in the new project and can be safely deleted.";
 
 export const needsMigration = writable<boolean>(false);
 
-export function determineMigrationStatus(settings: LongformPluginSettings) {
+export function determineMigrationStatus(settings: ScriptoriumPluginSettings) {
   needsMigration.set(settings.version < LONGFORM_CURRENT_PLUGIN_DATA_VERSION);
 }
 
-export async function migrate(settings: LongformPluginSettings, app: App) {
+export async function migrate(settings: ScriptoriumPluginSettings, app: App) {
   if (settings.version >= LONGFORM_CURRENT_PLUGIN_DATA_VERSION) {
     console.log(
-      `[Longform] Attempted to migrate settings with version ${settings.version} > current (${LONGFORM_CURRENT_PLUGIN_DATA_VERSION}); ignoring.`
+      `[Scriptorium] Attempted to migrate settings with version ${settings.version} > current (${LONGFORM_CURRENT_PLUGIN_DATA_VERSION}); ignoring.`
     );
     return;
   }
@@ -38,7 +38,7 @@ export async function migrate(settings: LongformPluginSettings, app: App) {
 
       const projectPaths = Object.keys(settings.projects);
       for (const projectPath of projectPaths) {
-        console.log(`[Longform] Migrating ${projectPath} to Projects 2.0…`);
+        console.log(`[Scriptorium] Migrating ${projectPath} to Projects 2.0…`);
         const project = settings.projects[projectPath];
         const normalizedProjectPath = normalizePath(projectPath);
 
@@ -68,7 +68,7 @@ export async function migrate(settings: LongformPluginSettings, app: App) {
           await app.vault.adapter.append(indexPath, INDEX_MIGRATION_NOTICE);
         } catch (error) {
           console.log(
-            `[Longform] Error appending deprecation notice to old index file`,
+            `[Scriptorium] Error appending deprecation notice to old index file`,
             error
           );
         }
@@ -100,7 +100,7 @@ export async function migrate(settings: LongformPluginSettings, app: App) {
             ),
             normalizedProjectPath
           );
-          console.log(`[Longform] Wrote only draft to ${vaultPath}`);
+          console.log(`[Scriptorium] Wrote only draft to ${vaultPath}`);
         } else {
           for (const oldDraft of drafts) {
             const vaultPathParent = normalizePath(
@@ -110,7 +110,7 @@ export async function migrate(settings: LongformPluginSettings, app: App) {
               await app.vault.createFolder(vaultPathParent);
             } catch (error) {
               console.log(
-                `[Longform] Error creating folder during migration`,
+                `[Scriptorium] Error creating folder during migration`,
                 error
               );
             }
@@ -141,7 +141,7 @@ export async function migrate(settings: LongformPluginSettings, app: App) {
               ),
               vaultPathParent
             );
-            console.log(`[Longform] Wrote ${oldDraft.name} to ${vaultPath}`);
+            console.log(`[Scriptorium] Wrote ${oldDraft.name} to ${vaultPath}`);
           }
         }
       }

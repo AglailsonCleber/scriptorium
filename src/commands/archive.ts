@@ -76,7 +76,7 @@ export function defaultCopyFolder(app: App, title: string): string {
   }
   return modules.path.join(
     modules.path.dirname(base),
-    "Longform Archive",
+    "Scriptorium Archive",
     safeTitle(title),
     datedStamp(new Date())
   );
@@ -217,7 +217,7 @@ function currentDraft(): Draft | null {
 export async function backupProject(app: App): Promise<void> {
   const draft = currentDraft();
   if (!draft) {
-    new Notice("Open a Longform project first.");
+    new Notice("Open a Scriptorium project first.");
     return;
   }
   const folder = defaultCopyFolder(app, draft.title);
@@ -236,7 +236,7 @@ export async function backupProject(app: App): Promise<void> {
 export function exportProject(app: App): void {
   const draft = currentDraft();
   if (!draft) {
-    new Notice("Open a Longform project first.");
+    new Notice("Open a Scriptorium project first.");
     return;
   }
   new FolderModal(app, "Export this project", defaultCopyFolder(app, draft.title), (folder) => {
@@ -250,7 +250,7 @@ export function exportProject(app: App): void {
 export function encryptProject(app: App): void {
   const draft = currentDraft();
   if (!draft) {
-    new Notice("Open a Longform project first.");
+    new Notice("Open a Scriptorium project first.");
     return;
   }
   new EncryptModal(app, defaultCopyFolder(app, draft.title), (folder, passphrase) => {
@@ -292,7 +292,7 @@ export function decryptProject(app: App): void {
       }
       const envelope = envelopeFrom(parsed);
       if (!envelope) {
-        new Notice("That file is not a Longform archive.");
+        new Notice("That file is not a Scriptorium archive.");
         return;
       }
       const files = await openArchive(envelope, passphrase);
@@ -341,7 +341,7 @@ export async function addBookWord(app: App): Promise<void> {
   const view = app.workspace.getActiveViewOfType(MarkdownView);
   const draft = view?.file ? draftForPath(view.file.path, get(drafts)) : null;
   if (!view?.file || !draft) {
-    new Notice("Open a Longform page first.");
+    new Notice("Open a Scriptorium page first.");
     return;
   }
   const selected = view.editor.getSelection().trim();
@@ -387,7 +387,7 @@ export async function removeBookWord(app: App, word: string): Promise<void> {
 export function countSyllables(app: App): void {
   const view = app.workspace.getActiveViewOfType(MarkdownView);
   if (!view?.file || !draftForPath(view.file.path, get(drafts))) {
-    new Notice("Open a Longform page first.");
+    new Notice("Open a Scriptorium page first.");
     return;
   }
   const selected = view.editor.getSelection();
@@ -399,7 +399,7 @@ export function countSyllables(app: App): void {
 export function announcePage(app: App): void {
   const view = app.workspace.getActiveViewOfType(MarkdownView);
   if (!view?.file || !draftForPath(view.file.path, get(drafts))) {
-    new Notice("Open a Longform page first.");
+    new Notice("Open a Scriptorium page first.");
     return;
   }
   const pattern = /[0-9A-Za-z\u00C0-\u024F]+/g;

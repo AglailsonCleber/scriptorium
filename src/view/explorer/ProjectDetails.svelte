@@ -304,7 +304,7 @@ import { draftForPath, projectFolderPath } from "src/model/scene-navigation";
       >Delete project</button
     >
     <p class="longform-project-warning">
-      Removes every draft of this project, its scenes, and the folders Longform keeps beside it. Other notes in the folder stay.
+      Removes every draft of this project, its scenes, and the folders Scriptorium keeps beside it. Other notes in the folder stay.
     </p>
   </div>
 </div>

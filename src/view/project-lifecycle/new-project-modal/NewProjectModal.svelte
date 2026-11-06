@@ -75,17 +75,17 @@
       <p>
         A <i>multi-scene project</i> is comprised of many ordered notes, called “scenes,”
         that you can combine together into your manuscript. It also includes an index
-        file, the YAML frontmatter of which is used by Longform to track your project.
+        file, the YAML frontmatter of which is used by Scriptorium to track your project.
       </p>
       <p>
-        Because this project type involves multiple notes, Longform will create
+        Because this project type involves multiple notes, Scriptorium will create
         an enclosing folder for your project and its scenes. You can always
         rename the folder, the index file, or both.
       </p>
     {:else}
       <p>
         A <i>single-scene project</i> is a single note, perhaps a short story or
-        essay, that includes its own YAML frontmatter which is used by Longform to
+        essay, that includes its own YAML frontmatter which is used by Scriptorium to
         track your project.
       </p>
     {/if}

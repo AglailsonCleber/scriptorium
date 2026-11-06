@@ -1,16 +1,16 @@
-# Commands in Longform
+# Commands in Scriptorium
 
-Commands appear in the Obsidian palette with the prefix **Longform:**. The names below are the ones registered by the plugin.
+Commands appear in the Obsidian palette with the prefix **Scriptorium:**. The names below are the ones registered by the plugin.
 
-A command that edits the open note is available only while that note belongs to a Longform project. Verse, story, and chronicle commands appear only when the project kind includes that tab. A page-form command appears only when that form is allowed for the kind. A project with no kind keeps every tab and every form.
+A command that edits the open note is available only while that note belongs to a Scriptorium project. Verse, story, and chronicle commands appear only when the project kind includes that tab. A page-form command appears only when that form is allowed for the kind. A project with no kind keeps every tab and every form.
 
-Right-click a Longform note and open **Insert** (**Inserir**). A **Marks** section there holds **Insert dialogue dash**, **Insert margin note**, **Insert quotes**, and **Insert missing word**. **Insert hyphen** stays in the palette.
+Right-click a Scriptorium note and open **Insert** (**Inserir**). A **Marks** section there holds **Insert dialogue dash**, **Insert margin note**, **Insert quotes**, and **Insert missing word**. **Insert hyphen** stays in the palette.
 
 ## Projects and scenes
 
 | Name | Description |
 | --- | --- |
-| Open Longform pane | Opens the Longform pane. |
+| Open Scriptorium pane | Opens the Scriptorium pane. |
 | Open current note’s project | Selects the project of the note you are editing. |
 | Jump to project | Matches a project title and shows it in the pane. |
 | Jump to scene in current project | Matches a scene in the current project and opens it. |
@@ -24,7 +24,7 @@ Right-click a Longform note and open **Insert** (**Inserir**). A **Marks** secti
 | Unindent scene | Outdents the current scene one level. |
 | Insert multi-scene frontmatter | Writes multi-scene `longform` frontmatter into the note. |
 | Insert single-scene frontmatter | Writes single-scene `longform` frontmatter into the note. |
-| Delete this project | Asks, then moves that project’s index, scenes, and Longform folders to the system trash. |
+| Delete this project | Asks, then moves that project’s index, scenes, and Scriptorium folders to the system trash. |
 | Compile current project with current workflow | Compiles the selected project with its current workflow. |
 | Compile project… | Choose a project, draft, and workflow, then compile. |
 
@@ -174,4 +174,4 @@ These commands belong to a chronicle, or to a project that has no kind.
 | Add this word to the book | Teaches a word to this book’s dictionary. |
 | Count syllables | Portuguese syllables of the selection or the page. |
 | Announce this page | A screen-reader pass of the page. |
-| Ask about this passage | A question about the passage. The answer does not enter the prose. Suggestions stay off until **Settings → Longform → Suggestions** is on. |
+| Ask about this passage | A question about the passage. The answer does not enter the prose. Suggestions stay off until **Settings → Scriptorium → Suggestions** is on. |

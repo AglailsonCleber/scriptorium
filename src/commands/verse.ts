@@ -25,7 +25,7 @@ import { AskTextModal } from "src/view/revision/revision-modals";
 
 import type { CommandBuilder } from "./types";
 
-function activeLongformFile(app: App): TFile | null {
+function activeScriptoriumFile(app: App): TFile | null {
   const view = app.workspace.getActiveViewOfType(MarkdownView);
   const draft = view.file ? draftForPath(view.file.path, get(drafts)) : null;
   if (!view?.file || !draft || explorerTabs(draft).indexOf("Verse") < 0) {
@@ -44,9 +44,9 @@ function activeText(app: App): string {
 }
 
 export async function correctStress(app: App): Promise<void> {
-  const file = activeLongformFile(app);
+  const file = activeScriptoriumFile(app);
   if (!file) {
-    new Notice("Open a Longform verse note first.");
+    new Notice("Open a Scriptorium verse note first.");
     return;
   }
   const view = app.workspace.getActiveViewOfType(MarkdownView);
@@ -78,9 +78,9 @@ export async function correctStress(app: App): Promise<void> {
 
 export async function insertFormScaffold(app: App, kind?: FixedForm): Promise<void> {
   const view = app.workspace.getActiveViewOfType(MarkdownView);
-  const file = activeLongformFile(app);
+  const file = activeScriptoriumFile(app);
   if (!view || !file) {
-    new Notice("Open a Longform note first.");
+    new Notice("Open a Scriptorium note first.");
     return;
   }
   const run = (form: FixedForm) => {
@@ -127,7 +127,7 @@ export function lookupRhymes(app: App): void {
     }
     new AskTextModal(app, "Syllable filter (0 = any)", "0", (filterValue) => {
       const filter = Number(filterValue) || 0;
-      const file = activeLongformFile(app);
+      const file = activeScriptoriumFile(app);
       const stress = file
         ? stressMapFromFrontmatter(
             app.metadataCache.getFileCache(file)?.frontmatter
@@ -154,7 +154,7 @@ export function toggleSoundLayer(
 ): void {
   soundLayers.update((current) => {
     const next = { ...current, [layer]: !current[layer] };
-    const file = activeLongformFile(app);
+    const file = activeScriptoriumFile(app);
     if (file) {
       void app.fileManager.processFrontMatter(file, (frontmatter) => {
         frontmatter[SOUND_LAYERS_KEY] = next;
@@ -166,7 +166,7 @@ export function toggleSoundLayer(
 }
 
 export function setFoldStanza(app: App, index: number): void {
-  const file = activeLongformFile(app);
+  const file = activeScriptoriumFile(app);
   if (!file) {
     return;
   }
@@ -187,7 +187,7 @@ export function setFoldStanza(app: App, index: number): void {
 
 export function showLineScansion(app: App): void {
   const view = app.workspace.getActiveViewOfType(MarkdownView);
-  const file = activeLongformFile(app);
+  const file = activeScriptoriumFile(app);
   if (!view || !file) {
     return;
   }
@@ -209,7 +209,7 @@ export function showLineScansion(app: App): void {
 }
 
 export function syncSoundLayersFromFile(app: App): void {
-  const file = activeLongformFile(app);
+  const file = activeScriptoriumFile(app);
   if (!file) {
     return;
   }

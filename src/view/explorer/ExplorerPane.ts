@@ -25,10 +25,10 @@ import { UndoManager } from "../undo/undo-manager";
 import { ignoreScene } from "./scene-menu-items";
 import { trashPiece } from "src/commands/revision";
 import { confirmDeleteProject } from "src/commands/delete-project";
-import type LongformPlugin from "src/main";
+import type ScriptoriumPlugin from "src/main";
 import { appContext } from "../utils";
 
-export const VIEW_TYPE_LONGFORM_EXPLORER = "VIEW_TYPE_LONGFORM_EXPLORER";
+export const VIEW_TYPE_LONGFORM_EXPLORER = "scriptorium-explorer";
 
 export class ExplorerPane extends ItemView {
   private explorerView: ExplorerView;
@@ -44,7 +44,7 @@ export class ExplorerPane extends ItemView {
   }
 
   getDisplayText(): string {
-    return "Longform";
+    return "Scriptorium";
   }
 
   getIcon(): string {
@@ -196,7 +196,7 @@ export class ExplorerPane extends ItemView {
           item.onClick(onRename);
         });
         menu.addItem((item) => {
-          item.setTitle("Move to Longform trash");
+          item.setTitle("Move to Scriptorium trash");
           item.setIcon("archive");
           item.onClick(() => {
             if (file instanceof TFile) {
@@ -229,7 +229,7 @@ export class ExplorerPane extends ItemView {
           item.onClick(() => addRelativeScene("after", file));
         });
         menu.addItem((item) => {
-          item.setTitle("Ignore note in Longform");
+          item.setTitle("Ignore note in Scriptorium");
           item.setIcon("minus-circle");
           item.onClick(() =>
             ignoreScene(
@@ -239,7 +239,7 @@ export class ExplorerPane extends ItemView {
         });
         // Triggering this event lets other apps insert menu items
         // including Obsidian, giving us lots of stuff for free.
-        this.app.workspace.trigger("file-menu", menu, file, "longform");
+        this.app.workspace.trigger("file-menu", menu, file, "scriptorium");
         menu.showAtPosition({ x, y });
       }
     );
@@ -310,8 +310,8 @@ export class ExplorerPane extends ItemView {
     context.set("deleteCurrentProject", () => {
       const draft = get(selectedDraft);
       const plugin = (
-        this.app as { plugins?: { getPlugin(id: string): LongformPlugin | null } }
-      ).plugins?.getPlugin("longform");
+        this.app as { plugins?: { getPlugin(id: string): ScriptoriumPlugin | null } }
+      ).plugins?.getPlugin("scriptorium");
       if (!draft || !plugin) {
         return;
       }

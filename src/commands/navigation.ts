@@ -18,7 +18,7 @@ import {
   type SceneNavigationLocation,
 } from "src/model/scene-navigation";
 import { VIEW_TYPE_LONGFORM_EXPLORER } from "src/view/explorer/ExplorerPane";
-import type LongformPlugin from "src/main";
+import type ScriptoriumPlugin from "src/main";
 import type { Draft } from "src/model/types";
 import { draftTitle } from "src/model/draft-utils";
 import { JumpModal } from "./helpers";
@@ -122,7 +122,7 @@ export const focusCurrentDraft: CommandBuilder = () => ({
   },
 });
 
-const showLeaf = (plugin: LongformPlugin) => {
+const showLeaf = (plugin: ScriptoriumPlugin) => {
   plugin.initLeaf();
   const leaf = plugin.app.workspace
     .getLeavesOfType(VIEW_TYPE_LONGFORM_EXPLORER)
@@ -132,9 +132,9 @@ const showLeaf = (plugin: LongformPlugin) => {
   }
 };
 
-export const showLongform: CommandBuilder = (plugin) => ({
+export const showScriptorium: CommandBuilder = (plugin) => ({
   id: "longform-show-view",
-  name: "Open Longform pane",
+  name: "Open Scriptorium pane",
   callback: () => {
     showLeaf(plugin);
   },
@@ -167,7 +167,7 @@ export const jumpToProject: CommandBuilder = (plugin) => ({
               },
               {
                 command: "↵",
-                purpose: "to open in Longform",
+                purpose: "to open in Scriptorium",
               },
               {
                 command: "esc",
@@ -200,7 +200,7 @@ export const jumpToProject: CommandBuilder = (plugin) => ({
         },
         {
           command: "↵",
-          purpose: "to open in Longform",
+          purpose: "to open in Scriptorium",
         },
         {
           command: "esc",
@@ -285,7 +285,7 @@ export const revealProjectFolder: CommandBuilder = (plugin) => ({
       ].instance.revealInFolder(parent);
     } catch (error) {
       console.error(
-        "[Longform] Error calling file-explorer.revealInFolder:",
+        "[Scriptorium] Error calling file-explorer.revealInFolder:",
         error
       );
     }

@@ -96,7 +96,7 @@ export async function loadPlotScenes(app: App): Promise<PlotScene[]> {
 export async function createAlternateEnding(app: App): Promise<void> {
   const draft = get(selectedDraft);
   if (!draft) {
-    new Notice("Open a Longform project first.");
+    new Notice("Open a Scriptorium project first.");
     return;
   }
   const scenes = await loadPlotScenes(app);

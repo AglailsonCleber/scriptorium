@@ -13,12 +13,12 @@ import { bibleCards } from "src/model/bible-store";
 import { draftForPath } from "src/model/scene-navigation";
 import { drafts } from "src/model/stores";
 
-function inLongformLeaf(view: EditorView): boolean {
+function inScriptoriumLeaf(view: EditorView): boolean {
   return view.dom.closest(".longform-leaf") !== null;
 }
 
 function marks(view: EditorView, cards: BibleCard[]): DecorationSet {
-  if (!inLongformLeaf(view) || cards.length === 0) {
+  if (!inScriptoriumLeaf(view) || cards.length === 0) {
     return Decoration.none;
   }
   const byPath = new Map(cards.map((card) => [card.path, card]));

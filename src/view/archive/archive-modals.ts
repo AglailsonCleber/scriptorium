@@ -50,7 +50,7 @@ export class EncryptModal extends Modal {
     const { contentEl } = this;
     contentEl.createEl("h2", { text: "Encrypt a copy" });
     contentEl.createEl("p", {
-      text: "The passphrase is not saved. Longform does not upload the book.",
+      text: "The passphrase is not saved. Scriptorium does not upload the book.",
     });
     const folder = new TextComponent(contentEl);
     folder.setValue(this.initial);

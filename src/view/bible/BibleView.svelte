@@ -140,7 +140,7 @@
 
 <div class="longform-bible">
   {#if !title}
-    <p class="longform-bible-muted">Open a Longform note.</p>
+    <p class="longform-bible-muted">Open a Scriptorium note.</p>
   {:else}
     <h3>Series bible</h3>
     <p class="longform-bible-muted">

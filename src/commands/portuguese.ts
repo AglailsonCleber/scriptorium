@@ -12,7 +12,7 @@ import { drafts } from "src/model/stores";
 
 import type { CommandBuilder } from "./types";
 
-function isLongformFile(view: MarkdownView | MarkdownFileInfo): boolean {
+function isScriptoriumFile(view: MarkdownView | MarkdownFileInfo): boolean {
   const path = view.file?.path;
   if (!path) {
     return false;
@@ -55,7 +55,7 @@ export const insertDialogueDash: CommandBuilder = () => ({
   name: "Insert dialogue dash",
   icon: "minus",
   editorCheckCallback(checking, editor, view) {
-    if (!isLongformFile(view)) {
+    if (!isScriptoriumFile(view)) {
       return false;
     }
     if (checking) {
@@ -70,7 +70,7 @@ export const insertHyphen: CommandBuilder = () => ({
   name: "Insert hyphen",
   icon: "minus",
   editorCheckCallback(checking, editor, view) {
-    if (!isLongformFile(view)) {
+    if (!isScriptoriumFile(view)) {
       return false;
     }
     if (checking) {
@@ -85,7 +85,7 @@ export const insertQuotes: CommandBuilder = () => ({
   name: "Insert quotes",
   icon: "quote",
   editorCheckCallback(checking, editor, view) {
-    if (!isLongformFile(view)) {
+    if (!isScriptoriumFile(view)) {
       return false;
     }
     if (checking) {

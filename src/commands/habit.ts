@@ -157,7 +157,7 @@ export function sprintLabel(now = Date.now()): string {
 export function editProjectGoal(app: App): void {
   const draft = get(selectedDraft);
   if (!draft) {
-    new Notice("Open a Longform project first.");
+    new Notice("Open a Scriptorium project first.");
     return;
   }
   const index = app.vault.getAbstractFileByPath(draft.vaultPath);

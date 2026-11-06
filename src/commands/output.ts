@@ -131,7 +131,7 @@ export async function exportProjectFormat(
 ): Promise<void> {
   const draft = get(selectedDraft);
   if (!draft) {
-    new Notice("Open a Longform project first.");
+    new Notice("Open a Scriptorium project first.");
     return;
   }
   const contents = await manuscriptText(app, draft, separator);
@@ -170,7 +170,7 @@ export async function exportProjectFormat(
 export function editOpening(app: App): void {
   const draft = get(selectedDraft);
   if (!draft) {
-    new Notice("Open a Longform project first.");
+    new Notice("Open a Scriptorium project first.");
     return;
   }
   const index = app.vault.getAbstractFileByPath(draft.vaultPath);
@@ -195,7 +195,7 @@ export function editOpening(app: App): void {
 export async function showPrintPreview(app: App): Promise<void> {
   const draft = get(selectedDraft);
   if (!draft) {
-    new Notice("Open a Longform project first.");
+    new Notice("Open a Scriptorium project first.");
     return;
   }
   const contents = await manuscriptText(app, draft, "title");

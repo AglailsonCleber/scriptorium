@@ -1,6 +1,6 @@
-# Multi-scene Projects in Longform
+# Multi-scene Projects in Scriptorium
 
-In Longform, a project can either be [single-scene](./SINGLE_SCENE_PROJECTS.md) or multi-scene. Multi-scene projects order a set of notes that live in the same folder. These notes are referred to as _scenes_.
+In Scriptorium, a project can either be [single-scene](./SINGLE_SCENE_PROJECTS.md) or multi-scene. Multi-scene projects order a set of notes that live in the same folder. These notes are referred to as _scenes_.
 
 Creating a project starts with a kind: **Novel**, **Poetry**, **Story**, **Chronicle**, or **Script**. Novel and script suggest **Multi**. A collection of poems or a series of columns can still be multi-scene. The kind decides the other tabs and the page forms. A project with no `kind` keeps every tab. See the [manual](./MANUAL.md).
 
@@ -22,7 +22,7 @@ scenes:
   - fourth
 ```
 
-Reordering the list in the Scenes tab with drag-and-drop will reorder this frontmatter array (see [The Index File](./INDEX_FILE.md) for more details on how this works). You also have access to undo/redo when focused on the Longform pane: cmd (crtl on Windows)-z and cmd-shift-z will undo or redo your scene reorderings to a depth of 20 changes.
+Reordering the list in the Scenes tab with drag-and-drop will reorder this frontmatter array (see [The Index File](./INDEX_FILE.md) for more details on how this works). You also have access to undo/redo when focused on the Scriptorium pane: cmd (crtl on Windows)-z and cmd-shift-z will undo or redo your scene reorderings to a depth of 20 changes.
 
 ## Scene Indentation & Nesting
 
@@ -40,14 +40,14 @@ scenes:
   - fourth
 ```
 
-Longform takes advantage of YAML’s syntax for nested arrays to “indent” the frontmatter and make it look like your hierarchy.
+Scriptorium takes advantage of YAML’s syntax for nested arrays to “indent” the frontmatter and make it look like your hierarchy.
 
 There are two ways to change the indentation level of a scene:
 
 1. With the mouse, by dragging left and right on a scene.
 2. With the **Indent scene** and **Unindent scene** commands. These commands are only available if you are currently editing a scene.
 
-An important note about scene indentation and nesting is that, because your scene list does not directly correspond to a file system, your **indentation does not need to look like a file hierarchy**. For example, this is totally valid in Longform:
+An important note about scene indentation and nesting is that, because your scene list does not directly correspond to a file system, your **indentation does not need to look like a file hierarchy**. For example, this is totally valid in Scriptorium:
 
 ![an arbitrarily-nested list of scenes](./res/arbitrarily-nested-scenes-list.png)
 
@@ -63,11 +63,11 @@ scenes:
 
 What does this mean? Who knows! It’s your project, organize it how you want.
 
-Of note, [`LongformAPI`](../src/api/LongformAPI.ts) can parse and create these YAML lists.
+Of note, [`ScriptoriumAPI`](../src/api/ScriptoriumAPI.ts) can parse and create these YAML lists.
 
 ## Unknown Scenes & Ignored Scenes
 
-If Longform detects a `.md` file in your project’s scene folder that it doesn’t know about it will prompt you to add it to your project. This is a change from Longform 1.0 in which new files were automatically added to projects. When a new file is detected you can either:
+If Scriptorium detects a `.md` file in your project’s scene folder that it doesn’t know about it will prompt you to add it to your project. This is a change from Scriptorium 1.0 in which new files were automatically added to projects. When a new file is detected you can either:
 
 - **Add** it, in which case it is appended as a scene to your scene list (you can then reorder as needed), or
 - **Ignore** it, in which the filename (without the `.md` extension) is added to your project’s `ignoredFiles` list.

@@ -197,7 +197,7 @@ function lexiconOf(value: unknown): Lexicon | null {
   return lexicon;
 }
 
-/** A bible card lives beside the Longform block, so a project save does not erase it. */
+/** A bible card lives beside the Scriptorium block, so a project save does not erase it. */
 export function cardFromFrontmatter(
   path: string,
   frontmatter: unknown

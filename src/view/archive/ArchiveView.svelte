@@ -57,7 +57,7 @@
 <div class="longform-archive">
   <h3>Archive</h3>
   <p class="longform-archive-muted">
-    The book stays Markdown in this vault. A copy goes to a folder you can see. Sync is your choice. Longform does
+    The book stays Markdown in this vault. A copy goes to a folder you can see. Sync is your choice. Scriptorium does
     not upload the book.
   </p>
   <div class="longform-archive-actions">

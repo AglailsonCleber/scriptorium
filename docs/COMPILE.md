@@ -2,13 +2,13 @@
 
 The **Output** tab is the manuscript you send to a publisher or give to a reader. Poetry, a story, and a chronicle keep their form there. **Export as Markdown**, **Export in a format**, and **Install publisher and reading workflows** live on that tab. Import from a Markdown folder, a DOCX, or a Scrivener project creates notes and does not rewrite what you already have.
 
-The **Compile** tab is the older step workflow. It is still there. In it, you build **workflows** comprising **steps**. You can also write your own **user scripts** in JavaScript. Scripts load from the folder in **Settings → Longform → Compile**. A script error shows in the developer console, not inside the manuscript. **Compile current project with current workflow** uses the open project. **Compile project…** lets you choose the project, the draft, and the workflow.
+The **Compile** tab is the older step workflow. It is still there. In it, you build **workflows** comprising **steps**. You can also write your own **user scripts** in JavaScript. Scripts load from the folder in **Settings → Scriptorium → Compile**. A script error shows in the developer console, not inside the manuscript. **Compile current project with current workflow** uses the open project. **Compile project…** lets you choose the project, the draft, and the workflow.
 
 Before the steps run, Compile removes private margin notes (`%%? … %%`) and skips a piece whose role is **cut**, **variant**, or **appendix**. A `TK` stays in the text. **Remove Comments** can also strip any remaining Markdown comment (`%% … %%`) or HTML comment.
 
 ## Steps
 
-Steps are the basic building block of compilation. In Longform, a step takes an input (either all your scenes or a combined manuscript) and returns an output (either transformed scenes or an altered manuscript).
+Steps are the basic building block of compilation. In Scriptorium, a step takes an input (either all your scenes or a combined manuscript) and returns an output (either transformed scenes or an altered manuscript).
 
 There are three kinds of steps:
 
@@ -18,13 +18,13 @@ There are three kinds of steps:
 
 Steps must always be in the above order during compilation. Any number of scene steps, then one join step, then any number of manuscript steps.
 
-Many steps can be of multiple kinds. For example, the **Remove Links** step, which removes both external and internal links, can run as both a scene and manuscript step. Longform figures out how it should be run automatically based on its position relative to other steps.
+Many steps can be of multiple kinds. For example, the **Remove Links** step, which removes both external and internal links, can run as both a scene and manuscript step. Scriptorium figures out how it should be run automatically based on its position relative to other steps.
 
-Steps may sometimes have _options_, which are text or checkbox fields that the step uses to customize its function. A number of the steps built into Longform have options.
+Steps may sometimes have _options_, which are text or checkbox fields that the step uses to customize its function. A number of the steps built into Scriptorium have options.
 
 ### Built-in Steps
 
-Longform comes with a lot of steps for you to add to compilation.
+Scriptorium comes with a lot of steps for you to add to compilation.
 
 #### Prepend Title
 
@@ -94,9 +94,9 @@ Saves the manuscript as Markdown note in your vault. Options:
 
 ### User Script Steps
 
-In addition to the built-in steps above, Longform also supports user script steps, which are arbitrary JavaScript scripts that can be loaded and used like any other step.
+In addition to the built-in steps above, Scriptorium also supports user script steps, which are arbitrary JavaScript scripts that can be loaded and used like any other step.
 
-To add a user script to Longform, first create a folder somewhere in your vault where you'd like to store your user script steps. Longform will attempt to load all `.js` files in this folder as steps.
+To add a user script to Scriptorium, first create a folder somewhere in your vault where you'd like to store your user script steps. Scriptorium will attempt to load all `.js` files in this folder as steps.
 
 Next, add your first step as a `.js` file. Every step must export an object in the following shape:
 
@@ -106,7 +106,7 @@ compile = (input, context) => {
   /**
     Function that is executed during compilation. It may be `async`.
     Errors encountered during execution should be thrown and will
-    be handled by Longform.
+    be handled by Scriptorium.
     @param input If the step is of kind Scene or Join (see context),
     this will be *an array* containing elements of type:
       {
@@ -185,15 +185,15 @@ module.exports = {
 };
 ```
 
-Finally, to use your user script you must configure the _scripts folder_ setting in Longform plugin settings. Your user script should immediately appear below the setting.
+Finally, to use your user script you must configure the _scripts folder_ setting in Scriptorium plugin settings. Your user script should immediately appear below the setting.
 
-Once loaded, the user script will be available in the Add Step menu of Compile. Changes made to your user script will be automatically loaded after a short delay. If you use that script as a step, Longform will attempt to preserve your existing configuration (place in workflow, option values) whenever it reloads a user script. If it fails, or if your user script moves, your script folder changes, or the script is deleted, Longform will mark that step as invalid and you will have to remove or replace it before compiling is enabled.
+Once loaded, the user script will be available in the Add Step menu of Compile. Changes made to your user script will be automatically loaded after a short delay. If you use that script as a step, Scriptorium will attempt to preserve your existing configuration (place in workflow, option values) whenever it reloads a user script. If it fails, or if your user script moves, your script folder changes, or the script is deleted, Scriptorium will mark that step as invalid and you will have to remove or replace it before compiling is enabled.
 
 ## Workflows
 
-In Compile, steps are organized into workflows. Longform ships with a default workflow that demonstrates Compile and produces a simple formatted manuscript. Feel free to customize or delete the default workflow.
+In Compile, steps are organized into workflows. Scriptorium ships with a default workflow that demonstrates Compile and produces a simple formatted manuscript. Feel free to customize or delete the default workflow.
 
-You can create new workflows to suit each of your projects. Each workflow has a description box you may use to remind yourself what exactly the workflow does. A Longform project remembers its last-used workflow and will select it first when you next open the Compile tab.
+You can create new workflows to suit each of your projects. Each workflow has a description box you may use to remind yourself what exactly the workflow does. A Scriptorium project remembers its last-used workflow and will select it first when you next open the Compile tab.
 
 Workflows are vault-wide; if you change a workflow within a project, it will change for all projects that use that workflow.
 

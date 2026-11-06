@@ -148,7 +148,7 @@ export class LiteraryLedger {
   }
 
   private filePath(): string {
-    return `${this.app.vault.configDir}/plugins/longform/literary.json`;
+    return `${this.app.vault.configDir}/plugins/scriptorium/literary.json`;
   }
 
   private async read(): Promise<void> {

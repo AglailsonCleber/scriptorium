@@ -181,7 +181,7 @@ export class WorkshopLedger {
   }
 
   private filePath(): string {
-    return `${this.app.vault.configDir}/plugins/longform/workshop.json`;
+    return `${this.app.vault.configDir}/plugins/scriptorium/workshop.json`;
   }
 
   private async read(): Promise<void> {

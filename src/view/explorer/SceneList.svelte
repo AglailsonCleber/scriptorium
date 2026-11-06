@@ -415,7 +415,7 @@
     <div id="longform-unknown-files-wizard">
       <div class="longform-unknown-inner">
         <p class="longform-unknown-explanation">
-          Longform has found {$selectedDraft.unknownFiles.length} new file{$selectedDraft
+          Scriptorium has found {$selectedDraft.unknownFiles.length} new file{$selectedDraft
             .unknownFiles.length === 1
             ? ""
             : "s"} in your scenes folder.

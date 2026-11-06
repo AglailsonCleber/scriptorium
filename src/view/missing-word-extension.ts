@@ -11,12 +11,12 @@ import { missingWordsInLine } from "src/model/missing-word";
 
 const MISSING_WORD_CLASS = "longform-missing-word";
 
-function inLongformLeaf(view: EditorView): boolean {
+function inScriptoriumLeaf(view: EditorView): boolean {
   return view.dom.closest(".longform-leaf") !== null;
 }
 
 function marks(view: EditorView): DecorationSet {
-  if (!inLongformLeaf(view)) {
+  if (!inScriptoriumLeaf(view)) {
     return Decoration.none;
   }
   const ranges = [];
@@ -47,12 +47,12 @@ class MissingWordMarks {
   private inLeaf = false;
 
   constructor(view: EditorView) {
-    this.inLeaf = inLongformLeaf(view);
+    this.inLeaf = inScriptoriumLeaf(view);
     this.decorations = marks(view);
   }
 
   update(update: ViewUpdate): void {
-    const leaf = inLongformLeaf(update.view);
+    const leaf = inScriptoriumLeaf(update.view);
     const nudged = update.transactions.some((transaction) =>
       transaction.isUserEvent("longform.page")
     );

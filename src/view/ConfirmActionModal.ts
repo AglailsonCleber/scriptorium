@@ -1,8 +1,8 @@
 import { App, Modal, ButtonComponent } from "obsidian";
-import type LongformPlugin from "src/main";
+import type ScriptoriumPlugin from "src/main";
 
 export default class ConfirmActionModal extends Modal {
-  plugin: LongformPlugin;
+  plugin: ScriptoriumPlugin;
   title: string;
   explanation: string;
   yesText: string;

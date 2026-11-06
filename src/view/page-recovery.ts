@@ -83,7 +83,7 @@ export class PageRecovery {
     const offer = recoveryOffer(fileText, file.stat.mtime, snapshot);
     if (!offer) {
       if (manual) {
-        new Notice("This page matches the copy Longform kept.");
+        new Notice("This page matches the copy Scriptorium kept.");
       }
       return;
     }
@@ -114,7 +114,7 @@ export class PageRecovery {
   }
 
   private filePath(): string {
-    return `${this.app.vault.configDir}/plugins/longform/recovery.json`;
+    return `${this.app.vault.configDir}/plugins/scriptorium/recovery.json`;
   }
 
   private async read(): Promise<void> {

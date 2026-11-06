@@ -1,20 +1,20 @@
-# Manual do Longform
+# Manual do Scriptorium
 
-Longform é um plugin do Obsidian para escrever romance, poema, conto, crônica e roteiro. O manuscrito continua sendo Markdown. O que o ofício precisa — meta, versão, oficina, envio — fica ao lado do texto, em propriedades da nota ou no painel, e não reescreve a prosa.
+Scriptorium é um plugin do Obsidian para escrever romance, poema, conto, crônica e roteiro. Ele se baseia no [Longform](https://github.com/kevboh/longform), de Kevin Barrett. O manuscrito continua sendo Markdown, e o índice continua com o bloco `longform`, para um projeto já escrito nesse formato seguir abrindo. O que o ofício precisa — meta, versão, oficina, envio — fica ao lado do texto, em propriedades da nota ou no painel, e não reescreve a prosa.
 
-A interface está em inglês. Os nomes de abas, botões e comandos abaixo são os que aparecem no app. Os comandos ficam na paleta do Obsidian com o prefixo **Longform:**.
+A interface está em inglês. Os nomes de abas, botões e comandos abaixo são os que aparecem no app. Os comandos ficam na paleta do Obsidian com o prefixo **Scriptorium:**.
 
 ## Abrir o painel
 
-1. Abra a paleta de comandos e rode **Open Longform pane**.
+1. Abra a paleta de comandos e rode **Open Scriptorium pane**.
 2. O painel lista os projetos do vault. Escolha um no seletor no topo.
 3. As abas mudam conforme o projeto. Um projeto de várias cenas tem **Scenes**. Um projeto de uma nota só não tem.
 
-Notas que não pertencem a um projeto Longform ficam de fora do painel, da contagem e da compilação.
+Notas que não pertencem a um projeto Scriptorium ficam de fora do painel, da contagem e da compilação.
 
 ## Criar um projeto
 
-Clique com o botão direito numa pasta e escolha **Create Longform Project**.
+Clique com o botão direito numa pasta e escolha **Create Scriptorium Project**.
 
 Escolha o tipo antes de criar: **Novel**, **Poetry**, **Story**, **Chronicle** ou **Script**. As abas do painel, a forma da página e os comandos de verso, conto e crônica passam a ser os desse tipo. **Novel** e **Script** sugerem **Multi**. **Poetry**, **Story** e **Chronicle** sugerem **Single**. Dá para trocar: uma coletânea de poemas ou uma série de crônicas usa **Multi**. Um projeto antigo, sem tipo gravado, continua com todas as abas e com as quatro formas de página.
 
@@ -43,7 +43,7 @@ Na aba **Scenes**:
 
 - Digite o título no campo de cena nova e confirme. A nota abre pronta para escrever.
 - Arraste para reordenar. Arraste para a direita, ou use **Indent scene** / **Unindent scene**, para aninhar capítulo, parte e cena. **Show scene numbers in Scenes tab** numera essas peças, por exemplo `1.1.2`.
-- **New scene template**, em **Settings → Longform → Composition**, é o modelo das cenas novas. Cada projeto pode trocar o modelo em **Project**. **Write scene index to frontmatter** grava o índice e o número da cena nas propriedades da nota.
+- **New scene template**, em **Settings → Scriptorium → Composition**, é o modelo das cenas novas. Cada projeto pode trocar o modelo em **Project**. **Write scene index to frontmatter** grava o índice e o número da cena nas propriedades da nota.
 - **Previous scene** e **Next scene** saltam na ordem do manuscrito. As variantes “at indent level” ficam no mesmo nível.
 - **Jump to scene in current project** abre uma cena pelo nome.
 - **Reveal current project in navigation** mostra a pasta no explorador de arquivos.
@@ -52,9 +52,9 @@ Cena cortada, variante e apêndice continuam no projeto. A compilação e a leit
 
 ## A página
 
-Estas opções valem só para notas de um projeto Longform. O resto do vault não muda.
+Estas opções valem só para notas de um projeto Scriptorium. O resto do vault não muda.
 
-Em **Settings → Longform → Page**:
+Em **Settings → Scriptorium → Page**:
 
 | Opção | O que faz |
 | --- | --- |
@@ -70,7 +70,7 @@ Em **Settings → Longform → Page**:
 | **Page language** | Língua da nota. As opções são **Off**, **Portuguese (Brazil)**, **Portuguese (Portugal)**, **English**, **Spanish**, **French**, **Italian** e **German**. O corretor usa o dicionário dessa língua, quando instalado. O ditado e a leitura em voz alta seguem a mesma escolha. **Off** deixa a página sem marca para o corretor; ditado e leitura, nesse caso, usam português. A contagem de sílabas do verso continua em português. |
 | **Manuscript font size** | Tamanho próprio do manuscrito, de 14 a 32, quando o interruptor está ligado. |
 | **Stronger contrast** | O texto e a página se separam mais. |
-| **Reduce motion** | Páginas e painéis do Longform ficam parados. A opção do sistema também vale. |
+| **Reduce motion** | Páginas e painéis do Scriptorium ficam parados. A opção do sistema também vale. |
 
 Atalhos equivalentes: **Toggle current line highlight**, **Toggle focus mode**, **Toggle typewriter mode**.
 
@@ -313,7 +313,7 @@ Quase tudo o que o painel grava é uma propriedade ao lado do bloco `longform`, 
 
 Não edite o bloco `longform` para mudar ordem de cenas, papel ou forma. Use as abas. Com **Hide note properties** ligado, o bloco e o YAML do topo ficam fora da visualização de edição e da de leitura. As propriedades continuam no arquivo. Para vê-las, desligue a opção.
 
-Em **Settings → Longform → Troubleshooting**, **Wait for Obsidian Sync** segura o plugin até a primeira sincronização terminar. **Enable fallback wait** e **Fallback wait time** esperam os segundos indicados quando o estado da sincronização não aparece.
+Em **Settings → Scriptorium → Troubleshooting**, **Wait for Obsidian Sync** segura o plugin até a primeira sincronização terminar. **Enable fallback wait** e **Fallback wait time** esperam os segundos indicados quando o estado da sincronização não aparece.
 
 ## Um dia de trabalho
 

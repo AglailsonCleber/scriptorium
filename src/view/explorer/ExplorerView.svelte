@@ -41,7 +41,7 @@
 {#if $needsMigration}
   <div class="longform-explorer">
     <p>
-      Longform has been upgraded and requires a migration to a new format.
+      Scriptorium has been upgraded and requires a migration to a new format.
       Deprecated index files will be deleted, and some scene files may move.
       It’s recommended to back up your vault before migrating.
     </p>

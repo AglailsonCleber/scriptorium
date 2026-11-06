@@ -8,7 +8,7 @@ import {
 import type { Unsubscriber } from "svelte/store";
 import { get } from "svelte/store";
 
-import type LongformPlugin from "../../main";
+import type ScriptoriumPlugin from "../../main";
 import { pluginSettings, userScriptSteps } from "src/model/stores";
 import { FolderSuggest } from "./folder-suggest";
 import { DEFAULT_SESSION_FILE } from "src/model/types";
@@ -16,14 +16,14 @@ import { PAGE_LANGUAGE_OPTIONS } from "src/model/page-language";
 import { FileSuggest } from "./file-suggest";
 import { syncSceneIndices } from "src/model/store-vault-sync";
 
-export class LongformSettingsTab extends PluginSettingTab {
-  plugin: LongformPlugin;
+export class ScriptoriumSettingsTab extends PluginSettingTab {
+  plugin: ScriptoriumPlugin;
   private unsubscribeUserScripts: Unsubscriber;
   private unsubscribeSettings: Unsubscriber;
   private stepsSummary: HTMLElement;
   private stepsList: HTMLUListElement;
 
-  constructor(app: App, plugin: LongformPlugin) {
+  constructor(app: App, plugin: ScriptoriumPlugin) {
     super(app, plugin);
     this.plugin = plugin;
   }
@@ -49,7 +49,7 @@ export class LongformSettingsTab extends PluginSettingTab {
     });
     containerEl.createEl("p", { cls: "setting-item-description" }, (el) => {
       el.innerHTML =
-        "This file will be used as a template when creating new scenes via the New Scene… field. If you use a templating plugin (Templater or the core plugin) it will be used to process this template. This setting applies to all projects and can be overridden per-project in the Project > Project Metadata settings in the Longform pane.";
+        "This file will be used as a template when creating new scenes via the New Scene… field. If you use a templating plugin (Templater or the core plugin) it will be used to process this template. This setting applies to all projects and can be overridden per-project in the Project > Project Metadata settings in the Scriptorium pane.";
     });
 
     new Setting(containerEl)
@@ -89,7 +89,7 @@ export class LongformSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Hide note properties")
       .setDesc(
-        "On notes inside a Longform project, hide the properties block at the top of the page. The properties stay in the file."
+        "On notes inside a Scriptorium project, hide the properties block at the top of the page. The properties stay in the file."
       )
       .addToggle((cb) => {
         cb.setValue(settings.hideProperties);
@@ -102,7 +102,7 @@ export class LongformSettingsTab extends PluginSettingTab {
       });
     new Setting(containerEl)
       .setName("Highlight current line")
-      .setDesc("In a Longform note, tint the line the cursor is on.")
+      .setDesc("In a Scriptorium note, tint the line the cursor is on.")
       .addToggle((cb) => {
         cb.setValue(settings.highlightCurrentLine);
         cb.onChange((value) => {
@@ -129,7 +129,7 @@ export class LongformSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Typewriter mode")
       .setDesc(
-        "Keep the cursor line centered while you write in a Longform note."
+        "Keep the cursor line centered while you write in a Scriptorium note."
       )
       .addToggle((cb) => {
         cb.setValue(settings.typewriterMode);
@@ -143,7 +143,7 @@ export class LongformSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Reading measure")
       .setDesc(
-        "Give a Longform note a column made for long prose. Other notes keep the full width."
+        "Give a Scriptorium note a column made for long prose. Other notes keep the full width."
       )
       .addToggle((cb) => {
         cb.setValue(settings.readingMeasure);
@@ -199,7 +199,7 @@ export class LongformSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Opposite theme")
       .setDesc(
-        "Longform notes use the opposite of Obsidian's theme: a light page when the app is dark, and a dark page when the app is light."
+        "Scriptorium notes use the opposite of Obsidian's theme: a light page when the app is dark, and a dark page when the app is light."
       )
       .addToggle((cb) => {
         cb.setValue(settings.lightManuscript);
@@ -213,7 +213,7 @@ export class LongformSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Page language")
       .setDesc(
-        "Language of a Longform note. The spell checker uses it when that dictionary is installed. Dictation and read-aloud follow it. Off leaves the page unmarked."
+        "Language of a Scriptorium note. The spell checker uses it when that dictionary is installed. Dictation and read-aloud follow it. Off leaves the page unmarked."
       )
       .addDropdown((cb) => {
         for (const option of PAGE_LANGUAGE_OPTIONS) {
@@ -234,7 +234,7 @@ export class LongformSettingsTab extends PluginSettingTab {
       });
     new Setting(containerEl)
       .setName("Manuscript font size")
-      .setDesc("Use a size of your choosing on Longform pages.")
+      .setDesc("Use a size of your choosing on Scriptorium pages.")
       .addToggle((cb) => {
         cb.setValue(settings.manuscriptFont);
         cb.onChange((value) => {
@@ -269,7 +269,7 @@ export class LongformSettingsTab extends PluginSettingTab {
       });
     new Setting(containerEl)
       .setName("Reduce motion")
-      .setDesc("Longform pages and panes stay still. The system setting is followed as well.")
+      .setDesc("Scriptorium pages and panes stay still. The system setting is followed as well.")
       .addToggle((cb) => {
         cb.setValue(settings.reduceMotion);
         cb.onChange((value) => {
@@ -284,7 +284,7 @@ export class LongformSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Suggestions")
       .setDesc(
-        "Off by default. A reply is shown beside the passage and is not written into the page. Longform does not choose a model for you."
+        "Off by default. A reply is shown beside the passage and is not written into the page. Scriptorium does not choose a model for you."
       )
       .addToggle((cb) => {
         cb.setValue(settings.suggestions);
@@ -380,7 +380,7 @@ export class LongformSettingsTab extends PluginSettingTab {
     });
     containerEl.createEl("p", { cls: "setting-item-description" }, (el) => {
       el.innerHTML =
-        "User Script Steps are automatically loaded from this folder. Changes to .js files in this folder are synced with Longform after a slight delay. If your script does not appear here or in the Compile tab, you may have an error in your script—check the dev console for it.";
+        "User Script Steps are automatically loaded from this folder. Changes to .js files in this folder are synced with Scriptorium after a slight delay. If your script does not appear here or in the Compile tab, you may have an error in your script—check the dev console for it.";
     });
 
     new Setting(containerEl).setName("Word Counts & Sessions").setHeading();
@@ -399,7 +399,7 @@ export class LongformSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Start new writing sessions each day")
       .setDesc(
-        "You can always manually start a new session by running the Longform: Start New Writing Session command. Turning this off will cause writing sessions to carry over across multiple days until you manually start a new one."
+        "You can always manually start a new session by running the Scriptorium: Start New Writing Session command. Turning this off will cause writing sessions to carry over across multiple days until you manually start a new one."
       )
       .addToggle((cb) => {
         cb.setValue(settings.startNewSessionEachDay);
@@ -459,7 +459,7 @@ export class LongformSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Goal applies to")
       .setDesc(
-        "You can set your word count goal to target all Longform writing, or you can make each project or scene have its own discrete goal. Applies when the session unit is words."
+        "You can set your word count goal to target all Scriptorium writing, or you can make each project or scene have its own discrete goal. Applies when the session unit is words."
       )
       .addDropdown((cb) => {
         cb.addOption("all", "words written across all projects");
@@ -510,10 +510,10 @@ export class LongformSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Store session data")
       .setDesc(
-        "Where your writing session data is stored. By default, data is stored alongside other Longform settings in the plugin’s data.json file. You may instead store it in a separate .json file in the plugin folder, or in a file in your vault. You may want to do this for selective sync or git reasons."
+        "Where your writing session data is stored. By default, data is stored alongside other Scriptorium settings in the plugin’s data.json file. You may instead store it in a separate .json file in the plugin folder, or in a file in your vault. You may want to do this for selective sync or git reasons."
       )
       .addDropdown((cb) => {
-        cb.addOption("data", "with Longform settings");
+        cb.addOption("data", "with Scriptorium settings");
         cb.addOption(
           "plugin-folder",
           "as a .json file in the longform/ plugin folder"
@@ -559,7 +559,7 @@ export class LongformSettingsTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName("Wait for Obsidian Sync")
-      .setDesc("Prevent Longform from running until Obsidian Sync completes its first sync. If you are using Sync, you may want to enable this if you experience issues with scenes disappearing or falsely being shown as new.")
+      .setDesc("Prevent Scriptorium from running until Obsidian Sync completes its first sync. If you are using Sync, you may want to enable this if you experience issues with scenes disappearing or falsely being shown as new.")
       .addToggle((cb) => {
         cb.setValue(settings.waitForSync);
         cb.onChange((value) => {
@@ -603,11 +603,11 @@ export class LongformSettingsTab extends PluginSettingTab {
 
     containerEl.createEl("p", {}, (el) => {
       el.innerHTML =
-        'Longform written and maintained by <a href="https://kevinbarrett.org">Kevin Barrett</a>.';
+        'Scriptorium is based on <a href="https://github.com/kevboh/longform">Longform</a>, written by <a href="https://kevinbarrett.org">Kevin Barrett</a>.';
     });
     containerEl.createEl("p", {}, (el) => {
       el.innerHTML =
-        'Read the source code and report issues at <a href="https://github.com/kevboh/longform">https://github.com/kevboh/longform</a>.';
+        'Read the Scriptorium source and report issues at <a href="https://github.com/AglailsonCleber/scriptorium">https://github.com/AglailsonCleber/scriptorium</a>.';
     });
     containerEl.createEl("p", {}, (el) => {
       el.innerHTML =

@@ -22,7 +22,7 @@ export function pageFormClass(form: PageForm): string {
   return `longform-form-${form}`;
 }
 
-/** Writes the form beside the Longform block so a later project save keeps it. */
+/** Writes the form beside the Scriptorium block so a later project save keeps it. */
 export async function setNoteForm(
   app: App,
   file: TFile,

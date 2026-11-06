@@ -1,10 +1,10 @@
 # The Index File
 
-The Index File is a note with a `longform` frontmatter entry. You can think of it as the “root” of a project: it tells Longform what kind of project it is, where the scenes are, and other metadata needed to make everything work.
+The Index File is a note with a `longform` frontmatter entry. The key keeps the name from [Longform](https://github.com/kevboh/longform), the project Scriptorium is based on, so an existing manuscript still opens. You can think of the note as the root of a project: it tells Scriptorium what kind of project it is, where the scenes are, and other metadata needed to make everything work.
 
 ## The `longform` Entry
 
-The `longform` frontmatter entry is how Longform discovers, tracks, and reasons about projects. It contains the following properties:
+The `longform` frontmatter entry is how Scriptorium discovers, tracks, and reasons about projects. It contains the following properties:
 
 | Name       | Type                                           | Required? | Description                                                                                                                                                                                          |
 | ---------- | ---------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -20,11 +20,11 @@ In addition to the above, multi-scene projects have some additional frontmatter 
 
 | Name          | Type                          | Required? | Description                                                                                                                                            |
 | ------------- | ----------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| sceneFolder   | `string`                      | false     | The path—relative to the index file—where your scenes live. If it is omitted, Longform uses the index file’s own folder.                               |
+| sceneFolder   | `string`                      | false     | The path—relative to the index file—where your scenes live. If it is omitted, Scriptorium uses the index file’s own folder.                               |
 | scenes        | `string[]` (array of strings) | true      | Nested arrays of scene file names (without .md extensions).                                                                                            |
 | sceneTemplate | `string`                      | false     | Path to file to use as a template for newly-created scenes in this project.                                                                            |
 | ignoredFiles  | `string[]` (array of strings) | false     | If present, a list of scene names (without .md extensions, wildcards are allowed) to ignore when prompting to add newly-created files to your project. |
 
 ## Other Frontmatter
 
-You’re free to put any other frontmatter you’d like in the index file as long as that frontmatter is outside the `longform` entry. Longform will leave it alone. You might want to do this to integrate with other Obsidian plugins.
+You’re free to put any other frontmatter you’d like in the index file as long as that frontmatter is outside the `longform` entry. Scriptorium will leave it alone. You might want to do this to integrate with other Obsidian plugins.

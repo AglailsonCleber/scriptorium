@@ -18,14 +18,14 @@ const KIND_CLASS = {
   adverb: "longform-prose-adverb",
 } as const;
 
-function inLongformLeaf(view: EditorView): boolean {
+function inScriptoriumLeaf(view: EditorView): boolean {
   return view.dom.closest(".longform-leaf") !== null;
 }
 
 function marks(view: EditorView): DecorationSet {
   const toggles = get(proseToggles);
   const path = view.dom.closest("[data-longform-path]")?.getAttribute("data-longform-path") ?? "";
-  if (!path || !toggles.onPage || !inLongformLeaf(view) || get(readerPaths).indexOf(path) >= 0) {
+  if (!path || !toggles.onPage || !inScriptoriumLeaf(view) || get(readerPaths).indexOf(path) >= 0) {
     return Decoration.none;
   }
   const placed: { from: number; to: number; kind: keyof typeof KIND_CLASS }[] = [];

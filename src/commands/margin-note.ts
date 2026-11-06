@@ -14,7 +14,7 @@ import { MarginNotesModal } from "src/view/MarginNotesModal";
 
 import type { CommandBuilder } from "./types";
 
-function isLongformFile(view: MarkdownView | MarkdownFileInfo): boolean {
+function isScriptoriumFile(view: MarkdownView | MarkdownFileInfo): boolean {
   const path = view.file?.path;
   if (!path) {
     return false;
@@ -45,7 +45,7 @@ export const insertMarginNote: CommandBuilder = () => ({
   id: "longform-insert-margin-note",
   name: "Insert margin note",
   editorCheckCallback(checking, editor, view) {
-    if (!isLongformFile(view)) {
+    if (!isScriptoriumFile(view)) {
       return false;
     }
     if (checking) {
@@ -59,7 +59,7 @@ export const listMarginNotes: CommandBuilder = (plugin) => ({
   id: "longform-list-margin-notes",
   name: "List margin notes",
   editorCheckCallback(checking, editor, view) {
-    if (!isLongformFile(view)) {
+    if (!isScriptoriumFile(view)) {
       return false;
     }
     if (checking) {

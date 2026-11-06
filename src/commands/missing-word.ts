@@ -7,7 +7,7 @@ import { drafts } from "src/model/stores";
 
 import type { CommandBuilder } from "./types";
 
-function isLongformFile(view: MarkdownView | MarkdownFileInfo): boolean {
+function isScriptoriumFile(view: MarkdownView | MarkdownFileInfo): boolean {
   const path = view.file?.path;
   if (!path) {
     return false;
@@ -41,7 +41,7 @@ export const insertMissingWord: CommandBuilder = () => ({
   name: "Insert missing word",
   icon: "bookmark",
   editorCheckCallback(checking, editor, view) {
-    if (!isLongformFile(view)) {
+    if (!isScriptoriumFile(view)) {
       return false;
     }
     if (checking) {

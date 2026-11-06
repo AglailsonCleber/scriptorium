@@ -1,6 +1,6 @@
 import type { Draft } from "./types";
 
-/** Folders Longform creates beside a project index. */
+/** Folders Scriptorium creates beside a project index. */
 export const PROJECT_SIDE_FOLDERS = [
   "Pesquisa",
   "Bíblia",

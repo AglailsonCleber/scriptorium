@@ -149,7 +149,7 @@ export class RevisionLedger {
   }
 
   private filePath(): string {
-    return `${this.app.vault.configDir}/plugins/longform/revisions.json`;
+    return `${this.app.vault.configDir}/plugins/scriptorium/revisions.json`;
   }
 
   private async read(): Promise<void> {

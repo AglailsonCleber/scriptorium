@@ -18,7 +18,7 @@ function togglePageMode(
         enabled = !settings[key];
         return { ...settings, [key]: enabled };
       });
-      new Notice(`Longform: ${name} ${enabled ? "on" : "off"}`);
+      new Notice(`Scriptorium: ${name} ${enabled ? "on" : "off"}`);
     },
   });
 }

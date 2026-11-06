@@ -13,7 +13,7 @@ import { speechLanguage } from "src/model/page-language";
 
 import type { CommandBuilder } from "./types";
 
-function isLongformFile(view: MarkdownView | MarkdownFileInfo): boolean {
+function isScriptoriumFile(view: MarkdownView | MarkdownFileInfo): boolean {
   const path = view.file?.path;
   if (!path) {
     return false;
@@ -90,7 +90,7 @@ export const readAloud: CommandBuilder = () => ({
   id: "longform-read-aloud",
   name: "Read aloud",
   editorCheckCallback(checking, editor, view) {
-    if (!isLongformFile(view)) {
+    if (!isScriptoriumFile(view)) {
       return false;
     }
     if (checking) {

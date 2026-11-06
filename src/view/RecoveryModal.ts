@@ -16,7 +16,7 @@ export class RecoveryModal extends Modal {
     const { contentEl } = this;
     contentEl.createEl("h2", { text: "Recovered page" });
     contentEl.createEl("p", {
-      text: "Longform kept a newer copy of this page than the file on disk. Restore that copy, or keep what is open now.",
+      text: "Scriptorium kept a newer copy of this page than the file on disk. Restore that copy, or keep what is open now.",
     });
     const words = this.text.trim().length === 0 ? 0 : this.text.trim().split(/\s+/).length;
     contentEl.createEl("p", {

@@ -87,7 +87,7 @@ async function sceneTexts(
 export async function readManuscript(app: App): Promise<void> {
   const draft = get(selectedDraft);
   if (!draft) {
-    new Notice("Open a Longform project first.");
+    new Notice("Open a Scriptorium project first.");
     return;
   }
   let body = "";
@@ -119,7 +119,7 @@ export async function readManuscript(app: App): Promise<void> {
 export async function writeContents(app: App): Promise<void> {
   const draft = get(selectedDraft);
   if (!draft) {
-    new Notice("Open a Longform project first.");
+    new Notice("Open a Scriptorium project first.");
     return;
   }
   const pieces =
@@ -149,7 +149,7 @@ export async function createFormPiece(
 ): Promise<void> {
   const draft = get(selectedDraft);
   if (!draft) {
-    new Notice("Open a Longform project first.");
+    new Notice("Open a Scriptorium project first.");
     return;
   }
   if (draft.format === "single") {

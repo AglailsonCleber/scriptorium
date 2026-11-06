@@ -49,7 +49,7 @@ function activePiece(app: App): { path: string; title: string; project: string; 
 }
 
 async function ensureWorkshopFolder(app: App): Promise<string> {
-  const root = `${app.vault.configDir}/plugins/longform`;
+  const root = `${app.vault.configDir}/plugins/scriptorium`;
   const folder = `${root}/workshop`;
   try {
     await app.vault.adapter.mkdir(root);
@@ -68,14 +68,14 @@ export async function openWorkshopRound(app: App): Promise<void> {
   const ledger = workshopLedger();
   const piece = activePiece(app);
   if (!ledger || !piece) {
-    new Notice("Open a Longform page first.");
+    new Notice("Open a Scriptorium page first.");
     return;
   }
   new AskTextModal(app, "Workshop round", "Round 1", (title) => {
     void (async () => {
       const id = newWorkshopId();
       const folder = await ensureWorkshopFolder(app);
-      const frozenPath = `plugins/longform/workshop/${id}.md`;
+      const frozenPath = `plugins/scriptorium/workshop/${id}.md`;
       await app.vault.adapter.write(`${folder}/${id}.md`, piece.text);
       const workshop: Workshop = {
         id,
@@ -428,7 +428,7 @@ export function listForSwap(app: App): void {
   const ledger = workshopLedger();
   const piece = activePiece(app);
   if (!ledger || !piece) {
-    new Notice("Open a Longform page first.");
+    new Notice("Open a Scriptorium page first.");
     return;
   }
   new AskTextModal(app, "Genre for the queue", "conto", (genre) => {

@@ -9,7 +9,7 @@ import {
 } from "src/model/project-deletion";
 import { pluginSettings, projects, selectedDraft } from "src/model/stores";
 import type { Draft } from "src/model/types";
-import type LongformPlugin from "src/main";
+import type ScriptoriumPlugin from "src/main";
 import ConfirmActionModal from "src/view/ConfirmActionModal";
 import { literaryLedger } from "src/view/literary-ledger";
 import { workshopLedger } from "src/view/workshop-ledger";
@@ -51,7 +51,7 @@ async function removeFrozen(app: App, relative: string): Promise<void> {
 }
 
 export async function deleteProjectFiles(
-  plugin: LongformPlugin,
+  plugin: ScriptoriumPlugin,
   projectDrafts: Draft[]
 ): Promise<void> {
   const app = plugin.app;
@@ -151,7 +151,7 @@ export async function deleteProjectFiles(
   );
 }
 
-export function confirmDeleteProject(plugin: LongformPlugin, draft: Draft): void {
+export function confirmDeleteProject(plugin: ScriptoriumPlugin, draft: Draft): void {
   const group = get(projects)[draft.title] ?? [draft];
   const count = group.length;
   new ConfirmActionModal(
@@ -173,7 +173,7 @@ export const deleteProjectCommand: CommandBuilder = (plugin) => ({
   callback: () => {
     const draft = get(selectedDraft);
     if (!draft) {
-      new Notice("Open a Longform project first.");
+      new Notice("Open a Scriptorium project first.");
       return;
     }
     confirmDeleteProject(plugin, draft);

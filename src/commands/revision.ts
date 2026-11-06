@@ -39,7 +39,7 @@ export const nameThisVersion: CommandBuilder = (plugin) => ({
     const view = longformView(plugin.app);
     const ledger = revisionLedger();
     if (!view?.file || !ledger) {
-      new Notice("Open a Longform page first.");
+      new Notice("Open a Scriptorium page first.");
       return;
     }
     const path = view.file.path;
@@ -58,7 +58,7 @@ export function showEarlierParagraph(app: App): void {
   const view = longformView(app);
   const ledger = revisionLedger();
   if (!view?.file || !ledger) {
-    new Notice("Open a Longform page first.");
+    new Notice("Open a Scriptorium page first.");
     return;
   }
   const editor = view.editor;
@@ -100,7 +100,7 @@ export const setRevisionMark: CommandBuilder = (plugin) => ({
     const view = longformView(plugin.app);
     const ledger = revisionLedger();
     if (!view?.file || !ledger) {
-      new Notice("Open a Longform page first.");
+      new Notice("Open a Scriptorium page first.");
       return;
     }
     ledger.setMark(view.file.path, view.editor.getValue());
@@ -213,7 +213,7 @@ export const readAsReader: CommandBuilder = (plugin) => ({
 export async function toggleReader(app: App): Promise<void> {
   const view = longformView(app);
   if (!view?.file) {
-    new Notice("Open a Longform page first.");
+    new Notice("Open a Scriptorium page first.");
     return;
   }
   const enabled = toggleReaderPath(view.file.path);

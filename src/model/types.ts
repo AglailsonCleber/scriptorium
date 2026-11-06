@@ -84,7 +84,7 @@ export type WordCountSession = {
   >;
 };
 
-export interface LongformPluginSettings {
+export interface ScriptoriumPluginSettings {
   version: number;
   selectedDraftVaultPath: string | null;
   workflows: Record<string, SerializedWorkflow> | null;
@@ -109,7 +109,7 @@ export interface LongformPluginSettings {
   fallbackWaitEnabled: boolean;
   fallbackWaitTime: number;
   writeProperty: boolean;
-  /** Accent the cursor line in Longform notes. */
+  /** Accent the cursor line in Scriptorium notes. */
   highlightCurrentLine: boolean;
   /** Hide the properties block on notes that belong to a project. */
   hideProperties: boolean;
@@ -125,15 +125,15 @@ export interface LongformPluginSettings {
   lineHeight: number;
   /** Horizontal padding around the column, in pixels. */
   pageMargin: number;
-  /** Longform notes use the opposite of Obsidian's current theme. */
+  /** Scriptorium notes use the opposite of Obsidian's current theme. */
   lightManuscript: boolean;
-  /** BCP 47 language of a Longform note. Empty leaves the page unmarked. */
+  /** BCP 47 language of a Scriptorium note. Empty leaves the page unmarked. */
   pageLanguage: string;
   /** Use a chosen size for the manuscript instead of the app font. */
   manuscriptFont: boolean;
   /** Manuscript size in pixels when manuscriptFont is on. */
   manuscriptFontSize: number;
-  /** Stop motion in the Longform page and panes. */
+  /** Stop motion in the Scriptorium page and panes. */
   reduceMotion: boolean;
   /** Push the manuscript text and page further apart. */
   strongContrast: boolean;
@@ -155,7 +155,7 @@ export interface LongformPluginSettings {
 
 export const DEFAULT_SESSION_FILE = "longform-sessions.json";
 
-export const DEFAULT_SETTINGS: LongformPluginSettings = {
+export const DEFAULT_SETTINGS: ScriptoriumPluginSettings = {
   version: LONGFORM_CURRENT_PLUGIN_DATA_VERSION,
   selectedDraftVaultPath: null,
   workflows: null,
@@ -199,7 +199,7 @@ export const DEFAULT_SETTINGS: LongformPluginSettings = {
   fallbackWaitTime: 5,
 };
 
-export const TRACKED_SETTINGS_PATHS: (keyof LongformPluginSettings)[] = [
+export const TRACKED_SETTINGS_PATHS: (keyof ScriptoriumPluginSettings)[] = [
   "version",
   "projects",
   "selectedDraftVaultPath",
@@ -242,7 +242,7 @@ export const TRACKED_SETTINGS_PATHS: (keyof LongformPluginSettings)[] = [
   "suggestionKey",
 ];
 
-export const PASSTHROUGH_SAVE_SETTINGS_PATHS: (keyof LongformPluginSettings)[] =
+export const PASSTHROUGH_SAVE_SETTINGS_PATHS: (keyof ScriptoriumPluginSettings)[] =
   [
     "sessionStorage",
     "userScriptFolder",

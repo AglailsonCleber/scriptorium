@@ -57,12 +57,12 @@ function lineElement(view: EditorView, pos: number): HTMLElement | null {
   return node?.closest(".cm-line") ?? null;
 }
 
-function inLongformLeaf(view: EditorView): boolean {
+function inScriptoriumLeaf(view: EditorView): boolean {
   return view.dom.closest(".longform-leaf") !== null;
 }
 
 function syntaxMarks(view: EditorView): DecorationSet {
-  if (!inLongformLeaf(view)) {
+  if (!inScriptoriumLeaf(view)) {
     return Decoration.none;
   }
   const marks = [];
@@ -99,14 +99,14 @@ class MarginNoteLayer {
     view.dom.appendChild(this.layer);
     this.onScroll = () => this.paint(view);
     view.scrollDOM.addEventListener("scroll", this.onScroll, { passive: true });
-    this.inLeaf = inLongformLeaf(view);
+    this.inLeaf = inScriptoriumLeaf(view);
     this.decorations = syntaxMarks(view);
     this.refreshHasNote(view);
     this.repaintAfterLayout(view);
   }
 
   update(update: ViewUpdate): void {
-    const leaf = inLongformLeaf(update.view);
+    const leaf = inScriptoriumLeaf(update.view);
     const leafChanged = leaf !== this.inLeaf;
     const nudged = update.transactions.some((transaction) =>
       transaction.isUserEvent("longform.page")
@@ -155,7 +155,7 @@ class MarginNoteLayer {
 
   private refreshHasNote(view: EditorView): void {
     this.hasNote = false;
-    if (!inLongformLeaf(view)) {
+    if (!inScriptoriumLeaf(view)) {
       return;
     }
     const doc = view.state.doc;

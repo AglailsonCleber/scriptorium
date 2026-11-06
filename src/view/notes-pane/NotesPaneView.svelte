@@ -41,7 +41,7 @@
 <div class="longform-notes-pane">
   <h3>Page form</h3>
   {#if !project}
-    <p class="longform-notes-empty">Open a Longform note.</p>
+    <p class="longform-notes-empty">Open a Scriptorium note.</p>
   {:else}
     <div class="longform-form-bar">
       {#each forms as item (item)}
@@ -88,7 +88,7 @@
     include them.
   </p>
   {#if !project}
-    <p class="longform-notes-empty">Open a Longform note.</p>
+    <p class="longform-notes-empty">Open a Scriptorium note.</p>
   {:else}
     {#if comments.length === 0}
       <p class="longform-notes-empty">None in {project}.</p>

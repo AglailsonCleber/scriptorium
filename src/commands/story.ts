@@ -40,7 +40,7 @@ function activeFile(app: App): TFile | null {
 export function setStoryLength(app: App, kind?: LengthKind): void {
   const file = activeFile(app);
   if (!file) {
-    new Notice("Open a Longform story first.");
+    new Notice("Open a Scriptorium story first.");
     return;
   }
   const run = (value: LengthKind) => {
@@ -155,7 +155,7 @@ export function hangAlternateEnding(app: App): void {
 export function editMotifs(app: App, projectLevel: boolean): void {
   const draft = get(selectedDraft);
   if (!draft) {
-    new Notice("Open a Longform project first.");
+    new Notice("Open a Scriptorium project first.");
     return;
   }
   const target = projectLevel

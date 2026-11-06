@@ -1,6 +1,6 @@
 # Word Counts & Writing Sessions
 
-Longform counts the manuscript and tracks a writing session against a goal. Research does not enter the manuscript count. The day’s goal and the book’s goal are separate. The full Portuguese guide is the [manual](./MANUAL.md).
+Scriptorium counts the manuscript and tracks a writing session against a goal. Research does not enter the manuscript count. The day’s goal and the book’s goal are separate. The full Portuguese guide is the [manual](./MANUAL.md).
 
 ## Word Counts for Projects, Drafts, and Scenes
 

@@ -27,14 +27,14 @@ import {
 import {
   PASSTHROUGH_SAVE_SETTINGS_PATHS,
   type Draft,
-  type LongformPluginSettings,
+  type ScriptoriumPluginSettings,
   type SerializedWorkflow,
   type WordCountSession,
 } from "./model/types";
 import { DEFAULT_SETTINGS, TRACKED_SETTINGS_PATHS } from "./model/types";
 import { activeFile, goalProgress, selectedTab } from "./view/stores";
 import { ICON_NAME, ICON_SVG } from "./view/icon";
-import { LongformSettingsTab } from "./view/settings/LongformSettings";
+import { ScriptoriumSettingsTab } from "./view/settings/LongformSettings";
 import {
   deserializeWorkflow,
   serializeWorkflow,
@@ -67,7 +67,7 @@ import {
 import { draftForPath } from "./model/scene-navigation";
 import { WritingSessionTracker } from "./model/writing-session-tracker";
 import NewProjectModal from "./view/project-lifecycle/new-project-modal";
-import { LongformAPI } from "./api/LongformAPI";
+import { ScriptoriumAPI } from "./api/LongformAPI";
 import { cardFromFrontmatter } from "./model/bible";
 import type { BibleCard } from "./model/bible";
 import { bibleCards } from "./model/bible-store";
@@ -102,7 +102,7 @@ import {
 } from "./view/page-mode";
 
 const LONGFORM_LEAF_CLASS = "longform-leaf";
-const PAGE_SETTING_KEYS: (keyof LongformPluginSettings)[] = [
+const PAGE_SETTING_KEYS: (keyof ScriptoriumPluginSettings)[] = [
   "highlightCurrentLine",
   "hideProperties",
   "focusMode",
@@ -121,7 +121,7 @@ const PAGE_SETTING_KEYS: (keyof LongformPluginSettings)[] = [
 
 // TODO: Try and abstract away more logic from actual plugin hooks here
 
-export default class LongformPlugin extends Plugin {
+export default class ScriptoriumPlugin extends Plugin {
   pageRecovery!: PageRecovery;
   revisionLedger!: RevisionLedger;
   literaryLedger!: LiteraryLedger;
@@ -129,7 +129,7 @@ export default class LongformPlugin extends Plugin {
   // Local mirror of the pluginSettings store
   // since this class does a lot of ad-hoc settings fetching.
   // More efficient than a lot of get() calls.
-  cachedSettings: LongformPluginSettings | null = null;
+  cachedSettings: ScriptoriumPluginSettings | null = null;
   private unsubscribeSettings: Unsubscriber;
   private unsubscribeWorkflows: Unsubscriber;
   private unsubscribeDrafts: Unsubscriber;
@@ -138,12 +138,12 @@ export default class LongformPlugin extends Plugin {
   private unsubscribeGoalNotification: Unsubscriber;
   private userScriptObserver: UserScriptObserver;
   writingSessionTracker: WritingSessionTracker;
-  public api: LongformAPI;
+  public api: ScriptoriumAPI;
 
   private storeVaultSync: StoreVaultSync;
 
   async onload(): Promise<void> {
-    console.log(`[Longform] Starting Longform ${this.manifest.version}…`);
+    console.log(`[Scriptorium] Starting Scriptorium ${this.manifest.version}…`);
     addIcon(ICON_NAME, ICON_SVG);
 
     this.registerView(
@@ -162,7 +162,7 @@ export default class LongformPlugin extends Plugin {
         }
         menu.addItem((item) => {
           item
-            .setTitle("Create Longform Project")
+            .setTitle("Create Scriptorium Project")
             .setIcon(ICON_NAME)
             .onClick(() => {
               new NewProjectModal(this.app, file).open();
@@ -198,7 +198,7 @@ export default class LongformPlugin extends Plugin {
         this.cachedSettings &&
         changeInKeys(this.cachedSettings, value, PAGE_SETTING_KEYS)
       ) {
-        this.styleLongformLeaves();
+        this.styleScriptoriumLeaves();
       }
       if (
         !this.cachedSettings ||
@@ -215,7 +215,7 @@ export default class LongformPlugin extends Plugin {
     });
 
     await this.loadSettings();
-    this.addSettingTab(new LongformSettingsTab(this.app, this));
+    this.addSettingTab(new ScriptoriumSettingsTab(this.app, this));
 
     this.storeVaultSync = new StoreVaultSync(this.app);
 
@@ -277,19 +277,19 @@ export default class LongformPlugin extends Plugin {
     );
     this.registerEvent(
       this.app.workspace.on("css-change", () => {
-        this.styleLongformLeaves();
+        this.styleScriptoriumLeaves();
       })
     );
     this.registerEvent(
       this.app.metadataCache.on("changed", () => {
-        this.styleLongformLeaves();
+        this.styleScriptoriumLeaves();
         this.refreshBible();
         this.refreshCaptures();
         structureRevision.update((revision) => revision + 1);
       })
     );
     this.unsubscribeDrafts = drafts.subscribe((allDrafts) => {
-      this.styleLongformLeaves(allDrafts);
+      this.styleScriptoriumLeaves(allDrafts);
     });
     this.registerEvent(
       this.app.workspace.on("editor-change", (editor, info) => {
@@ -329,7 +329,7 @@ export default class LongformPlugin extends Plugin {
       })
     );
 
-    this.api = new LongformAPI();
+    this.api = new ScriptoriumAPI();
   }
 
   onunload(): void {
@@ -378,10 +378,10 @@ export default class LongformPlugin extends Plugin {
 
     // deserialize iso8601 strings as dates
 
-    const _pluginSettings: LongformPluginSettings = pick(
+    const _pluginSettings: ScriptoriumPluginSettings = pick(
       settings,
       TRACKED_SETTINGS_PATHS
-    ) as LongformPluginSettings;
+    ) as ScriptoriumPluginSettings;
     pluginSettings.set(_pluginSettings);
     selectedDraftVaultPath.set(_pluginSettings.selectedDraftVaultPath);
     determineMigrationStatus(_pluginSettings);
@@ -398,7 +398,7 @@ export default class LongformPlugin extends Plugin {
     let _workflows = settings["workflows"];
 
     if (!_workflows) {
-      console.log("[Longform] No workflows found; adding default workflow.");
+      console.log("[Scriptorium] No workflows found; adding default workflow.");
       _workflows = DEFAULT_WORKFLOWS;
     } else {
       _workflows = { ..._workflows };
@@ -526,7 +526,7 @@ export default class LongformPlugin extends Plugin {
         let file: string | null = null;
         if (this.cachedSettings.sessionStorage === "plugin-folder") {
           if (!this.manifest.dir) {
-            console.error(`[Longform] No manifest.dir for saving sessions.`);
+            console.error(`[Scriptorium] No manifest.dir for saving sessions.`);
             return;
           }
           file = normalizePath(`${this.manifest.dir}/sessions.json`);
@@ -795,15 +795,15 @@ export default class LongformPlugin extends Plugin {
   }
 
   private queuePageStyle(): void {
-    this.styleLongformLeaves();
+    this.styleScriptoriumLeaves();
     window.requestAnimationFrame(() => {
       window.requestAnimationFrame(() => {
-        this.styleLongformLeaves();
+        this.styleScriptoriumLeaves();
       });
     });
   }
 
-  private styleLongformLeaves(allDrafts: Draft[] = get(drafts)) {
+  private styleScriptoriumLeaves(allDrafts: Draft[] = get(drafts)) {
     const modes = pageModeClasses(get(pluginSettings));
     document.body.classList.toggle("longform-reduce-motion", get(pluginSettings).reduceMotion);
     this.app.workspace.getLeavesOfType("markdown").forEach((leaf) => {

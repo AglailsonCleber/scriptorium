@@ -10,7 +10,7 @@ import { get } from "svelte/store";
 import { craftTick, soundLayers, verseMode } from "src/model/craft-store";
 import { scanPoem, soundHits, wordsInLine } from "src/model/verse";
 
-function inLongformLeaf(view: EditorView): boolean {
+function inScriptoriumLeaf(view: EditorView): boolean {
   return view.dom.closest(".longform-leaf") !== null;
 }
 
@@ -19,7 +19,7 @@ function isVerseLeaf(view: EditorView): boolean {
 }
 
 function soundDecorations(view: EditorView): DecorationSet {
-  if (!inLongformLeaf(view) || !isVerseLeaf(view)) {
+  if (!inScriptoriumLeaf(view) || !isVerseLeaf(view)) {
     return Decoration.none;
   }
   const layers = get(soundLayers);
@@ -103,7 +103,7 @@ class VerseMargin {
   private paint(): void {
     const view = this.view;
     this.layer.innerHTML = "";
-    if (!inLongformLeaf(view) || !isVerseLeaf(view)) {
+    if (!inScriptoriumLeaf(view) || !isVerseLeaf(view)) {
       return;
     }
     const mode = get(verseMode);

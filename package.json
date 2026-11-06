@@ -1,7 +1,7 @@
 {
-  "name": "longform",
-  "version": "2.1.0",
-  "description": "Write novels, screenplays, and other long projects in Obsidian (https://obsidian.md).",
+  "name": "scriptorium",
+  "version": "1.0.0",
+  "description": "Write a novel, a poem, a story, a chronicle, or a script in Obsidian. Based on Longform.",
   "main": "main.js",
   "scripts": {
     "lint": "svelte-check --tsconfig tsconfig.json --fail-on-hints && eslint . --ext .ts",

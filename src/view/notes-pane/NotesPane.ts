@@ -29,7 +29,7 @@ import { get, type Unsubscriber } from "svelte/store";
 
 import NotesPaneView from "./NotesPaneView.svelte";
 
-export const VIEW_TYPE_LONGFORM_NOTES = "VIEW_TYPE_LONGFORM_NOTES";
+export const VIEW_TYPE_LONGFORM_NOTES = "scriptorium-notes";
 
 export type PrivateComment = MarginNoteHit & {
   path: string;
@@ -55,7 +55,7 @@ export class NotesPane extends ItemView {
   }
 
   getIcon(): string {
-    return "longform";
+    return "scriptorium";
   }
 
   async onOpen(): Promise<void> {

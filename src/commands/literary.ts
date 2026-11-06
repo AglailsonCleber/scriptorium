@@ -97,7 +97,7 @@ export async function preparePiece(app: App, venueId: string): Promise<void> {
   const ledger = literaryLedger();
   const piece = activePiece(app);
   if (!ledger || !piece) {
-    new Notice("Open a Longform page first.");
+    new Notice("Open a Scriptorium page first.");
     return;
   }
   const venue = venueById(ledger.venues, venueId);
@@ -169,11 +169,11 @@ export async function sendSubmission(app: App, id: string): Promise<void> {
     return;
   }
   const text = await app.vault.read(file);
-  const frozenPath = `plugins/longform/sent/${id}.md`;
-  const folder = `${app.vault.configDir}/plugins/longform/sent`;
+  const frozenPath = `plugins/scriptorium/sent/${id}.md`;
+  const folder = `${app.vault.configDir}/plugins/scriptorium/sent`;
   const full = `${folder}/${id}.md`;
   try {
-    await app.vault.adapter.mkdir(`${app.vault.configDir}/plugins/longform`);
+    await app.vault.adapter.mkdir(`${app.vault.configDir}/plugins/scriptorium`);
   } catch {
     // Plugin folder may already exist.
   }
@@ -303,7 +303,7 @@ export function addContract(app: App): void {
   const ledger = literaryLedger();
   const piece = activePiece(app);
   if (!ledger || !piece) {
-    new Notice("Open a Longform page first.");
+    new Notice("Open a Scriptorium page first.");
     return;
   }
   new ContractModal(app, (value) => {
@@ -364,7 +364,7 @@ export function buildEdition(app: App): void {
   const draft = get(selectedDraft);
   const ledger = literaryLedger();
   if (!draft || !ledger) {
-    new Notice("Open a Longform project first.");
+    new Notice("Open a Scriptorium project first.");
     return;
   }
   new CoverModal(app, (coverPath, title) => {

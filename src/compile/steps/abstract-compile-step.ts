@@ -135,7 +135,7 @@ export type CompileContext = {
 };
 
 /**
- * A step in a workflow that turns a Longform project into a compiled document (or some other result).
+ * A step in a workflow that turns a Scriptorium project into a compiled document (or some other result).
  */
 export interface CompileStep {
   /** A unique identifier for the step. */
@@ -147,7 +147,7 @@ export interface CompileStep {
   /**
     Function that is executed during compilation. It may be `async`.
     Errors encountered during execution should be thrown and will
-    be handled by Longform.
+    be handled by Scriptorium.
     @param input See `CompileInput`
     @param context See `CompileContext`
     @note For an example of using `context` to determine the shape of `input`, see
@@ -162,7 +162,7 @@ export interface CompileStep {
   ): CompileInput | Promise<CompileInput>;
 }
 
-/** A named series of steps to compile a Longform project into a finished product. */
+/** A named series of steps to compile a Scriptorium project into a finished product. */
 export type Workflow = {
   /** The name of the workflow via user input. */
   name: string;
@@ -205,7 +205,7 @@ export function typeMismatchError(
   context: CompileContext
 ): Error {
   return new Error(
-    `[Longform] A compile step received a type it did not expect. It expected "${expected}", but got "${got}" with step kind "${context.kind}"`
+    `[Scriptorium] A compile step received a type it did not expect. It expected "${expected}", but got "${got}" with step kind "${context.kind}"`
   );
 }
 
