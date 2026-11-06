@@ -1,7 +1,7 @@
-export const AUTHOR_KEY = "longform-author";
-export const DEDICATION_KEY = "longform-dedication";
-export const EPIGRAPH_KEY = "longform-epigraph";
-export const EPIGRAPH_SOURCE_KEY = "longform-epigraph-source";
+export const AUTHOR_KEY = "scriptorium-author";
+export const DEDICATION_KEY = "scriptorium-dedication";
+export const EPIGRAPH_KEY = "scriptorium-epigraph";
+export const EPIGRAPH_SOURCE_KEY = "scriptorium-epigraph-source";
 
 export type BookOpening = {
   title: string;

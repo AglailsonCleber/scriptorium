@@ -24,9 +24,9 @@ describe("habit", () => {
 
   it("keeps the project goal apart from the day", () => {
     const goal = projectGoalFromFrontmatter({
-      "longform-goal-amount": 80000,
-      "longform-goal-unit": "words",
-      "longform-goal-due": "2027-06-01",
+      "scriptorium-goal-amount": 80000,
+      "scriptorium-goal-unit": "words",
+      "scriptorium-goal-due": "2027-06-01",
     });
     expect(goal).toEqual({
       amount: 80000,

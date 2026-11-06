@@ -1,6 +1,6 @@
 # Manual do Scriptorium
 
-Scriptorium é um plugin do Obsidian para escrever romance, poema, conto, crônica e roteiro. Ele se baseia no [Longform](https://github.com/kevboh/longform), de Kevin Barrett. O manuscrito continua sendo Markdown, e o índice continua com o bloco `longform`, para um projeto já escrito nesse formato seguir abrindo. O que o ofício precisa — meta, versão, oficina, envio — fica ao lado do texto, em propriedades da nota ou no painel, e não reescreve a prosa.
+Scriptorium é um plugin do Obsidian para escrever romance, poema, conto, crônica e roteiro. Ele se baseia no [Longform](https://github.com/kevboh/longform), de Kevin Barrett. O manuscrito continua sendo Markdown. A espinha do índice é o bloco `scriptorium`. Um projeto que ainda tenha o bloco `longform` é renomeado para `scriptorium` quando o Scriptorium abre. O que o ofício precisa — meta, versão, oficina, envio — fica ao lado do texto, em propriedades da nota ou no painel, e não reescreve a prosa.
 
 A interface está em inglês. Os nomes de abas, botões e comandos abaixo são os que aparecem no app. Os comandos ficam na paleta do Obsidian com o prefixo **Scriptorium:**.
 
@@ -33,7 +33,7 @@ Todo projeto tem **Project**, **Capture**, **Structure**, **Revision**, **Archiv
 
 Também dá para criar o índice à mão com **Insert multi-scene frontmatter** ou **Insert single-scene frontmatter**.
 
-O bloco `longform` do índice é a espinha do projeto. Evite editá-lo direto. O plugin não apaga arquivos quando o índice muda, mas uma edição errada desorganiza a ordem.
+O bloco `scriptorium` do índice é a espinha do projeto. Evite editá-lo direto. O plugin não apaga arquivos quando o índice muda, mas uma edição errada desorganiza a ordem.
 
 Para apagar o projeto inteiro, use **Delete project** na aba **Project**, ou o comando **Delete this project**. O plugin pede confirmação e leva para a lixeira do sistema o índice, as cenas, e as pastas Pesquisa, Bíblia, Reading, Output e Workshop de cada rascunho desse título. Notas de pesquisa e fichas marcadas como deste projeto também saem. Arquivos seus que estejam na mesma pasta e não pertençam ao projeto ficam. A pasta do projeto só some se ficar vazia.
 
@@ -309,9 +309,9 @@ Pesquisa e inbox ficam de fora porque não são cenas do manuscrito. A cópia co
 
 ## Propriedades
 
-Quase tudo o que o painel grava é uma propriedade ao lado do bloco `longform`, no índice ou na cena. **Hide note properties** só esconde esse bloco na tela. Apagar a propriedade na nota apaga o dado.
+Quase tudo o que o painel grava é uma propriedade ao lado do bloco `scriptorium`, no índice ou na cena. **Hide note properties** só esconde esse bloco na tela. Apagar a propriedade na nota apaga o dado.
 
-Não edite o bloco `longform` para mudar ordem de cenas, papel ou forma. Use as abas. Com **Hide note properties** ligado, o bloco e o YAML do topo ficam fora da visualização de edição e da de leitura. As propriedades continuam no arquivo. Para vê-las, desligue a opção.
+Não edite o bloco `scriptorium` para mudar ordem de cenas, papel ou forma. Use as abas. Com **Hide note properties** ligado, o bloco e o YAML do topo ficam fora da visualização de edição e da de leitura. As propriedades continuam no arquivo. Para vê-las, desligue a opção.
 
 Em **Settings → Scriptorium → Troubleshooting**, **Wait for Obsidian Sync** segura o plugin até a primeira sincronização terminar. **Enable fallback wait** e **Fallback wait time** esperam os segundos indicados quando o estado da sincronização não aparece.
 

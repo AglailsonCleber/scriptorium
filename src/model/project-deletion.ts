@@ -1,3 +1,4 @@
+import { noteField } from "./manuscript-key";
 import type { Draft } from "./types";
 
 /** Folders Scriptorium creates beside a project index. */
@@ -89,13 +90,13 @@ export function noteOwnedByProject(frontmatter: unknown, title: string): boolean
     return false;
   }
   const record = frontmatter as Record<string, unknown>;
-  const capture = record["longform-capture"];
+  const capture = noteField(record, "scriptorium-capture");
   if (capture && typeof capture === "object") {
     if ((capture as Record<string, unknown>).project === title) {
       return true;
     }
   }
-  const card = record["longform-card"];
+  const card = noteField(record, "scriptorium-card");
   if (card && typeof card === "object") {
     if ((card as Record<string, unknown>).project === title) {
       return true;

@@ -22,8 +22,8 @@ Right-click a Scriptorium note and open **Insert** (**Inserir**). A **Marks** se
 | Next scene at indent level | Opens the next scene at the same indentation. |
 | Indent scene | Indents the current scene one level. |
 | Unindent scene | Outdents the current scene one level. |
-| Insert multi-scene frontmatter | Writes multi-scene `longform` frontmatter into the note. |
-| Insert single-scene frontmatter | Writes single-scene `longform` frontmatter into the note. |
+| Insert multi-scene frontmatter | Writes multi-scene `scriptorium` frontmatter into the note. |
+| Insert single-scene frontmatter | Writes single-scene `scriptorium` frontmatter into the note. |
 | Delete this project | Asks, then moves that project’s index, scenes, and Scriptorium folders to the system trash. |
 | Compile current project with current workflow | Compiles the selected project with its current workflow. |
 | Compile project… | Choose a project, draft, and workflow, then compile. |

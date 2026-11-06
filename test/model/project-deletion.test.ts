@@ -49,10 +49,10 @@ describe("project deletion", () => {
 
   it("recognizes research and bible notes kept for the project", () => {
     expect(
-      noteOwnedByProject({ "longform-capture": { project: "My Novel" } }, "My Novel")
+      noteOwnedByProject({ "scriptorium-capture": { project: "My Novel" } }, "My Novel")
     ).toBe(true);
     expect(
-      noteOwnedByProject({ "longform-card": { project: "My Novel" } }, "Other")
+      noteOwnedByProject({ "scriptorium-card": { project: "My Novel" } }, "Other")
     ).toBe(false);
     expect(pathCoveredByFolder("Books/My Novel/Pesquisa/a.md", "Books/My Novel/Pesquisa")).toBe(
       true

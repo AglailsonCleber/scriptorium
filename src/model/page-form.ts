@@ -4,7 +4,7 @@ export const PAGE_FORMS = ["prose", "verse", "column", "script"] as const;
 
 export type PageForm = (typeof PAGE_FORMS)[number];
 
-export const PAGE_FORM_KEY = "longform-form";
+export const PAGE_FORM_KEY = "scriptorium-form";
 
 export const PAGE_FORM_CLASSES = PAGE_FORMS.map(
   (form) => `longform-form-${form}`

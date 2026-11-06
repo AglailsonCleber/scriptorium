@@ -1,6 +1,6 @@
-export const GOAL_AMOUNT_KEY = "longform-goal-amount";
-export const GOAL_UNIT_KEY = "longform-goal-unit";
-export const GOAL_DUE_KEY = "longform-goal-due";
+export const GOAL_AMOUNT_KEY = "scriptorium-goal-amount";
+export const GOAL_UNIT_KEY = "scriptorium-goal-unit";
+export const GOAL_DUE_KEY = "scriptorium-goal-due";
 
 export const SESSION_UNITS = ["words", "minutes", "lines", "stanzas"] as const;
 export type SessionUnit = (typeof SESSION_UNITS)[number];

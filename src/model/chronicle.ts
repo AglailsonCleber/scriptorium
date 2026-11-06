@@ -1,22 +1,22 @@
 import { CEILING_KEY, WRITTEN_KEY } from "./architecture";
 import { PLACE_KEY, WHEN_KEY } from "./bible";
 
-export const CADENCE_KEY = "longform-column-cadence";
-export const CEILING_UNIT_KEY = "longform-ceiling-unit";
-export const DUE_KEY = "longform-due";
-export const PERSONA_KEY = "longform-persona";
-export const FACT_SEEN_KEY = "longform-fact-seen";
-export const FACT_INVENTED_KEY = "longform-fact-invented";
-export const PAPER_VERSION_KEY = "longform-paper-version";
-export const BOOK_VERSION_KEY = "longform-book-version";
-export const VENUE_KEY = "longform-venue";
-export const DESK_KEY = "longform-desk";
-export const PUBLISHED_KEY = "longform-published";
-export const REAL_PEOPLE_KEY = "longform-real-people";
-export const NARRATOR_KEY = "longform-narrator";
-export const FIRST_PUBLISHED_KEY = "longform-first-published";
-export const FIRST_VENUE_KEY = "longform-first-venue";
-export const COLUMN_SERIES_KEY = "longform-column-series";
+export const CADENCE_KEY = "scriptorium-column-cadence";
+export const CEILING_UNIT_KEY = "scriptorium-ceiling-unit";
+export const DUE_KEY = "scriptorium-due";
+export const PERSONA_KEY = "scriptorium-persona";
+export const FACT_SEEN_KEY = "scriptorium-fact-seen";
+export const FACT_INVENTED_KEY = "scriptorium-fact-invented";
+export const PAPER_VERSION_KEY = "scriptorium-paper-version";
+export const BOOK_VERSION_KEY = "scriptorium-book-version";
+export const VENUE_KEY = "scriptorium-venue";
+export const DESK_KEY = "scriptorium-desk";
+export const PUBLISHED_KEY = "scriptorium-published";
+export const REAL_PEOPLE_KEY = "scriptorium-real-people";
+export const NARRATOR_KEY = "scriptorium-narrator";
+export const FIRST_PUBLISHED_KEY = "scriptorium-first-published";
+export const FIRST_VENUE_KEY = "scriptorium-first-venue";
+export const COLUMN_SERIES_KEY = "scriptorium-column-series";
 
 export const CADENCES = ["weekly", "biweekly", "once"] as const;
 export type Cadence = (typeof CADENCES)[number];

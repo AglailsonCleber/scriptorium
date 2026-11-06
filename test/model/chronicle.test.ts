@@ -30,8 +30,8 @@ describe("chronicle", () => {
 
   it("warns when the vehicle ceiling is crossed", () => {
     const sheet = chronicleFromFrontmatter({
-      "longform-ceiling": 10,
-      "longform-ceiling-unit": "words",
+      "scriptorium-ceiling": 10,
+      "scriptorium-ceiling-unit": "words",
     });
     expect(ceilingCheck("one two three four five six seven eight nine ten eleven", sheet).over).toBe(
       true
@@ -42,9 +42,9 @@ describe("chronicle", () => {
     const frontmatter: Record<string, unknown> = {};
     preserveFirstPublication(frontmatter, "2020-01-01", "Jornal A");
     preserveFirstPublication(frontmatter, "2026-01-01", "Livro B");
-    expect(frontmatter["longform-first-published"]).toBe("2020-01-01");
-    expect(frontmatter["longform-first-venue"]).toBe("Jornal A");
-    expect(frontmatter["longform-published"]).toBe("2026-01-01");
+    expect(frontmatter["scriptorium-first-published"]).toBe("2020-01-01");
+    expect(frontmatter["scriptorium-first-venue"]).toBe("Jornal A");
+    expect(frontmatter["scriptorium-published"]).toBe("2026-01-01");
   });
 
   it("alerts on a due date without touching the session word goal", () => {

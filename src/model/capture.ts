@@ -1,4 +1,4 @@
-export const CAPTURE_KEY = "longform-capture";
+export const CAPTURE_KEY = "scriptorium-capture";
 
 export const CAPTURE_KINDS = [
   "fragment",

@@ -14,7 +14,7 @@ import {
 } from "src/model/bible";
 
 const maria = cardFromFrontmatter("Biblia/Maria.md", {
-  "longform-card": {
+  "scriptorium-card": {
     project: "Romance",
     kind: "person",
     status: "canon",
@@ -26,7 +26,7 @@ const maria = cardFromFrontmatter("Biblia/Maria.md", {
 });
 
 const joao = cardFromFrontmatter("Biblia/Joao.md", {
-  "longform-card": {
+  "scriptorium-card": {
     project: "Romance",
     kind: "person",
     status: "hypothesis",
@@ -37,7 +37,7 @@ const joao = cardFromFrontmatter("Biblia/Joao.md", {
 });
 
 const kitchen = cardFromFrontmatter("Biblia/Cozinha.md", {
-  "longform-card": {
+  "scriptorium-card": {
     project: "Romance",
     kind: "place",
     names: ["Cozinha"],

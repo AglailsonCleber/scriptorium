@@ -1,10 +1,10 @@
 # The Index File
 
-The Index File is a note with a `longform` frontmatter entry. The key keeps the name from [Longform](https://github.com/kevboh/longform), the project Scriptorium is based on, so an existing manuscript still opens. You can think of the note as the root of a project: it tells Scriptorium what kind of project it is, where the scenes are, and other metadata needed to make everything work.
+The Index File is a note with a `scriptorium` frontmatter entry. Scriptorium is based on [Longform](https://github.com/kevboh/longform). An index that still has a `longform` entry is renamed to `scriptorium` the next time Scriptorium opens. You can think of the note as the root of a project: it tells Scriptorium what kind of project it is, where the scenes are, and other metadata needed to make everything work.
 
-## The `longform` Entry
+## The `scriptorium` Entry
 
-The `longform` frontmatter entry is how Scriptorium discovers, tracks, and reasons about projects. It contains the following properties:
+The `scriptorium` frontmatter entry is how Scriptorium discovers, tracks, and reasons about projects. It contains the following properties:
 
 | Name       | Type                                           | Required? | Description                                                                                                                                                                                          |
 | ---------- | ---------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -16,7 +16,7 @@ The `longform` frontmatter entry is how Scriptorium discovers, tracks, and reaso
 
 Drafts of one project share `title`. `draftTitle` is the name of one draft. The app does not read `draftNumber`.
 
-In addition to the above, multi-scene projects have some additional frontmatter in the `longform` entry:
+In addition to the above, multi-scene projects have some additional frontmatter in the `scriptorium` entry:
 
 | Name          | Type                          | Required? | Description                                                                                                                                            |
 | ------------- | ----------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -27,4 +27,4 @@ In addition to the above, multi-scene projects have some additional frontmatter 
 
 ## Other Frontmatter
 
-You’re free to put any other frontmatter you’d like in the index file as long as that frontmatter is outside the `longform` entry. Scriptorium will leave it alone. You might want to do this to integrate with other Obsidian plugins.
+You’re free to put any other frontmatter you’d like in the index file as long as that frontmatter is outside the `scriptorium` entry. Scriptorium will leave it alone. You might want to do this to integrate with other Obsidian plugins.

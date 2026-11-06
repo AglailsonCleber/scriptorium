@@ -1,15 +1,15 @@
 import { readingMinutes } from "./habit";
 import { CEILING_KEY } from "./architecture";
 
-export const LENGTH_KIND_KEY = "longform-length-kind";
-export const FLOOR_KEY = "longform-floor";
-export const PIN_OPEN_KEY = "longform-pin-open";
-export const PIN_CLOSE_KEY = "longform-pin-close";
-export const REVEALED_KEY = "longform-revealed";
-export const SECRET_KEY = "longform-secret";
-export const EFFECT_KEY = "longform-effect";
-export const MOTIFS_KEY = "longform-motifs";
-export const MOTIF_KEY = "longform-motif";
+export const LENGTH_KIND_KEY = "scriptorium-length-kind";
+export const FLOOR_KEY = "scriptorium-floor";
+export const PIN_OPEN_KEY = "scriptorium-pin-open";
+export const PIN_CLOSE_KEY = "scriptorium-pin-close";
+export const REVEALED_KEY = "scriptorium-revealed";
+export const SECRET_KEY = "scriptorium-secret";
+export const EFFECT_KEY = "scriptorium-effect";
+export const MOTIFS_KEY = "scriptorium-motifs";
+export const MOTIF_KEY = "scriptorium-motif";
 
 export const LENGTH_KINDS = ["micro", "flash", "story", "novelette"] as const;
 export type LengthKind = (typeof LENGTH_KINDS)[number];

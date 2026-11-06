@@ -33,6 +33,8 @@ import {
 } from "./model/types";
 import { DEFAULT_SETTINGS, TRACKED_SETTINGS_PATHS } from "./model/types";
 import { activeFile, goalProgress, selectedTab } from "./view/stores";
+import { noteField } from "./model/manuscript-key";
+import { FOLD_STANZA_KEY } from "./model/verse";
 import { ICON_NAME, ICON_SVG } from "./view/icon";
 import { ScriptoriumSettingsTab } from "./view/settings/LongformSettings";
 import {
@@ -881,7 +883,7 @@ export default class ScriptoriumPlugin extends Plugin {
             pageClassesChanged = true;
           }
         }
-        const foldStanza = Number(frontmatter?.["longform-fold-stanza"]);
+        const foldStanza = Number(noteField(frontmatter, FOLD_STANZA_KEY));
         if (wantLeaf && form === "verse" && foldStanza > 0) {
           el.dataset.longformFold = String(Math.floor(foldStanza));
         } else {

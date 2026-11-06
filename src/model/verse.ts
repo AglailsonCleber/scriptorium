@@ -1,9 +1,9 @@
 import { syllablesInWord } from "./archive";
 
-export const STRESS_KEY = "longform-stress";
-export const FORM_KIND_KEY = "longform-form-kind";
-export const FOLD_STANZA_KEY = "longform-fold-stanza";
-export const SOUND_LAYERS_KEY = "longform-sound-layers";
+export const STRESS_KEY = "scriptorium-stress";
+export const FORM_KIND_KEY = "scriptorium-form-kind";
+export const FOLD_STANZA_KEY = "scriptorium-fold-stanza";
+export const SOUND_LAYERS_KEY = "scriptorium-sound-layers";
 
 export const SCANSION_MODES = ["classical", "phonetic"] as const;
 export type ScansionMode = (typeof SCANSION_MODES)[number];

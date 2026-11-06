@@ -22,14 +22,14 @@ export const AddBookOpeningStep = makeBuiltinStep({
       {
         id: "dedication",
         name: "Include dedication",
-        description: "From longform-dedication on the project index.",
+        description: "From scriptorium-dedication on the project index.",
         type: CompileStepOptionType.Boolean,
         default: true,
       },
       {
         id: "epigraph",
         name: "Include epigraph",
-        description: "From longform-epigraph on the project index.",
+        description: "From scriptorium-epigraph on the project index.",
         type: CompileStepOptionType.Boolean,
         default: true,
       },

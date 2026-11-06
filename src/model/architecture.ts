@@ -1,15 +1,15 @@
 import { PLACE_KEY, WHEN_KEY } from "./bible";
 import { stripMarginNotes } from "./margin-note";
 
-export const SYNOPSIS_KEY = "longform-synopsis";
-export const STATUS_KEY = "longform-status";
-export const POV_KEY = "longform-pov";
-export const CAST_KEY = "longform-cast";
-export const UNIT_KEY = "longform-unit";
-export const ROLE_KEY = "longform-role";
-export const WRITTEN_KEY = "longform-written";
-export const CEILING_KEY = "longform-ceiling";
-export const FORM_KEY = "longform-form";
+export const SYNOPSIS_KEY = "scriptorium-synopsis";
+export const STATUS_KEY = "scriptorium-status";
+export const POV_KEY = "scriptorium-pov";
+export const CAST_KEY = "scriptorium-cast";
+export const UNIT_KEY = "scriptorium-unit";
+export const ROLE_KEY = "scriptorium-role";
+export const WRITTEN_KEY = "scriptorium-written";
+export const CEILING_KEY = "scriptorium-ceiling";
+export const FORM_KEY = "scriptorium-form";
 
 export const PIECE_STATUSES = ["idea", "draft", "revision", "ready"] as const;
 export type PieceStatus = (typeof PIECE_STATUSES)[number];

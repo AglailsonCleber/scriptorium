@@ -16,6 +16,7 @@
   import { formatSceneNumber, numberScenes } from "src/model/draft-utils";
   import type { UndoManager } from "src/view/undo/undo-manager";
   import { cloneDeep } from "lodash";
+  import { noteField } from "src/model/manuscript-key";
   import { scenePath } from "src/model/scene-navigation";
   import { selectElementContents, useApp } from "../utils";
   import { addAll, addScene, ignoreAll, ignoreScene } from "./scene-menu-items";
@@ -87,11 +88,11 @@
       if (file && file instanceof TFile) {
         const metadata = app.metadataCache.getFileCache(file);
         const frontmatter = metadata?.frontmatter;
-        const pieceStatus = frontmatter?.["longform-status"] ?? frontmatter?.["status"];
+        const pieceStatus = noteField(frontmatter, "scriptorium-status") ?? frontmatter?.["status"];
         if (pieceStatus) {
           status = `${pieceStatus}`;
         }
-        const pieceRole = frontmatter?.["longform-role"];
+        const pieceRole = noteField(frontmatter, "scriptorium-role");
         if (pieceRole === "cut" || pieceRole === "variant" || pieceRole === "appendix") {
           role = `${pieceRole}`;
         }

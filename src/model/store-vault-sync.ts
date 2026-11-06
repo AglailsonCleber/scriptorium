@@ -23,6 +23,11 @@ import {
   setDraftOnFrontmatterObject,
 } from "src/model/draft-utils";
 import { fileNameFromPath } from "./note-utils";
+import {
+  manuscriptEntry,
+  manuscriptNeedsRename,
+  renameManuscriptFrontmatter,
+} from "./manuscript-key";
 import { projectKind } from "./project-kind";
 import { findScene, sceneFolderPath, scenePath } from "./scene-navigation";
 
@@ -36,14 +41,14 @@ export function resolveIfScriptoriumFile(
   file: TFile
 ): FileWithMetadata | null {
   const metadata = metadataCache.getFileCache(file);
-  if (metadata && metadata.frontmatter && metadata.frontmatter["longform"]) {
+  if (metadata && metadata.frontmatter && manuscriptEntry(metadata.frontmatter)) {
     return { file, metadata };
   }
   return null;
 }
 
 /**
- * Observes any file with a `longform` metadata entry and keeps its
+ * Observes any file with a `scriptorium` metadata entry and keeps its
  * metadata and associated scenes (if any) updated in the `drafts`
  * store.
  *
@@ -152,6 +157,7 @@ export class StoreVaultSync {
   async initialize() {
     try {
       await this.waitForSync();
+      await renameLegacyManuscripts(this.app);
       await this.discoverDrafts();
 
       this.isInitializing = false;
@@ -443,7 +449,7 @@ export class StoreVaultSync {
     if (!fileWithMetadata.metadata.frontmatter) {
       return null;
     }
-    const longformEntry = fileWithMetadata.metadata.frontmatter["longform"];
+    const longformEntry = manuscriptEntry(fileWithMetadata.metadata.frontmatter);
     if (!longformEntry) {
       return null;
     }
@@ -487,7 +493,7 @@ export class StoreVaultSync {
         }
 
         if (fm) {
-          rawScenes = fm["longform"]["scenes"];
+          rawScenes = manuscriptEntry(fm)?.["scenes"];
         }
       }
 
@@ -562,7 +568,7 @@ export class StoreVaultSync {
       };
     } else {
       console.log(
-        `[Scriptorium] Error loading draft at ${fileWithMetadata.file.path}: invalid longform.format. Ignoring.`
+        `[Scriptorium] Error loading draft at ${fileWithMetadata.file.path}: invalid scriptorium.format. Ignoring.`
       );
       return null;
     }
@@ -575,6 +581,7 @@ export class StoreVaultSync {
     }
 
     await this.app.fileManager.processFrontMatter(file, (fm) => {
+      renameManuscriptFrontmatter(fm);
       setDraftOnFrontmatterObject(fm, draft);
     });
 
@@ -637,9 +644,24 @@ function writeSceneNumbers(
   numbering: number[]
 ) {
   return app.fileManager.processFrontMatter(file, (fm) => {
-    fm["longform-order"] = index;
-    fm["longform-number"] = formatSceneNumber(numbering);
+    renameManuscriptFrontmatter(fm);
+    fm["scriptorium-order"] = index;
+    fm["scriptorium-number"] = formatSceneNumber(numbering);
   });
+}
+
+async function renameLegacyManuscripts(app: App): Promise<void> {
+  const files = app.vault.getMarkdownFiles();
+  for (let index = 0; index < files.length; index += 1) {
+    const file = files[index];
+    const frontmatter = app.metadataCache.getFileCache(file)?.frontmatter;
+    if (!manuscriptNeedsRename(frontmatter)) {
+      continue;
+    }
+    await app.fileManager.processFrontMatter(file, (fm) => {
+      renameManuscriptFrontmatter(fm);
+    });
+  }
 }
 
 const ESCAPED_CHARACTERS = new Set("/&$^+.()=!|[]{},".split(""));

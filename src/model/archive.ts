@@ -1,4 +1,4 @@
-export const WORD_KEY = "longform-words";
+export const WORD_KEY = "scriptorium-words";
 
 export type ArchiveFile = {
   path: string;

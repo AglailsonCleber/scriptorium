@@ -2,7 +2,7 @@
 
 Scriptorium is a plugin for [Obsidian](https://obsidian.md) for a novel, a poem, a story, a chronicle, or a script. The manuscript stays Markdown. It lets you organize a series of notes, or _scenes_, into an ordered manuscript, and it also supports a single note for a shorter work.
 
-Scriptorium is based on [Longform](https://github.com/kevboh/longform), by Kevin Barrett. The index of a project still uses a `longform` frontmatter block, so a manuscript written in that format keeps opening. The writing page still uses the `longform-leaf` class.
+Scriptorium is based on [Longform](https://github.com/kevboh/longform), by Kevin Barrett. The index of a project uses a `scriptorium` frontmatter block. A manuscript that still has the old `longform` block is renamed to `scriptorium` when Scriptorium opens it. The writing page still uses the `longform-leaf` class.
 
 Major features include:
 
@@ -22,7 +22,7 @@ Install Scriptorium from **Settings → Community plugins** once it is listed th
 
 ## Getting Started
 
-Scriptorium works by searching your vault for any note that contains a frontmatter entry named `longform` (don’t worry if you don’t know what that means; Scriptorium includes tools to help you generate these files). You can think of these notes as the “spines” or tables of contents of your projects. Let‘s walk through creating two different Scriptorium projects: a novel and a short story.
+Scriptorium works by searching your vault for any note that contains a frontmatter entry named `scriptorium` (don’t worry if you don’t know what that means; Scriptorium includes tools to help you generate these files). You can think of these notes as the “spines” or tables of contents of your projects. Let‘s walk through creating two different Scriptorium projects: a novel and a short story.
 
 ### Creating a Novel
 
@@ -59,7 +59,7 @@ This is how Scriptorium tracks your work.
 
 > **Warning**
 >
-> You should probably avoid editing the `longform` frontmatter in your index file directly unless you really know what you’re doing. Scriptorium supports direct editing of it and will do its best to sync, but it’s easy to accidentally mess things up. You can always revert your changes, though: Scriptorium will never delete files based on changes in the index file.
+> You should probably avoid editing the `scriptorium` frontmatter in your index file directly unless you really know what you’re doing. Scriptorium supports direct editing of it and will do its best to sync, but it’s easy to accidentally mess things up. You can always revert your changes, though: Scriptorium will never delete files based on changes in the index file.
 
 7. You’re now ready to write your novel. Keep adding scenes as needed. Drag a scene left or right, or use **Indent scene** and **Unindent scene**, to nest a part, a chapter, and a scene. [Multiple-scene projects](./docs/MULTIPLE_SCENE_PROJECTS.md) describes that list.
 
@@ -85,7 +85,7 @@ Scriptorium supports the creation of multiple _drafts_ for a given project. Unde
 
 To create a new draft of a project use the new draft (+) button in the Project tab, or create an entirely new project somewhere and set the title in the Project tab to be the same as your existing project.
 
-You can rename drafts by right-clicking them in the Project tab and selecting Rename, or by setting the `draftTitle` attribute in their `longform` frontmatter.
+You can rename drafts by right-clicking them in the Project tab and selecting Rename, or by setting the `draftTitle` attribute in their `scriptorium` frontmatter.
 
 ## Compiling
 

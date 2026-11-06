@@ -1,8 +1,8 @@
 import { marginNotesInLine } from "./margin-note";
 
-export const CARD_KEY = "longform-card";
-export const PLACE_KEY = "longform-place";
-export const WHEN_KEY = "longform-when";
+export const CARD_KEY = "scriptorium-card";
+export const PLACE_KEY = "scriptorium-place";
+export const WHEN_KEY = "scriptorium-when";
 
 export const CARD_KINDS = ["person", "place", "thing", "world"] as const;
 export type CardKind = (typeof CARD_KINDS)[number];

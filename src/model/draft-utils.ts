@@ -6,6 +6,7 @@ import { scenePath } from "src/model/scene-navigation";
 import { createNoteWithPotentialTemplate } from "./note-utils";
 import { defaultPageForm } from "./project-kind";
 import { setNoteForm } from "./page-form";
+import { MANUSCRIPT_BLOCK, renameManuscriptFrontmatter } from "./manuscript-key";
 import { pluginSettings } from "./stores";
 
 export function draftTitle(draft: Draft): string {
@@ -30,7 +31,7 @@ export async function createScene(
 
   if (get(pluginSettings).writeProperty) {
     await app.fileManager.processFrontMatter(note, (fm) => {
-      fm["longform-order"] = index;
+      fm["scriptorium-order"] = index;
     });
   }
 
@@ -92,28 +93,30 @@ export function setDraftOnFrontmatterObject(
   obj: Record<string, any>,
   draft: Draft
 ) {
-  obj["longform"] = {};
-  obj["longform"]["format"] = draft.format;
+  renameManuscriptFrontmatter(obj);
+  delete obj["longform"];
+  obj[MANUSCRIPT_BLOCK] = {};
+  obj[MANUSCRIPT_BLOCK]["format"] = draft.format;
   if (draft.titleInFrontmatter) {
-    obj["longform"]["title"] = draft.title;
+    obj[MANUSCRIPT_BLOCK]["title"] = draft.title;
   }
   if (draft.draftTitle) {
-    obj["longform"]["draftTitle"] = draft.draftTitle;
+    obj[MANUSCRIPT_BLOCK]["draftTitle"] = draft.draftTitle;
   }
   if (draft.workflow) {
-    obj["longform"]["workflow"] = draft.workflow;
+    obj[MANUSCRIPT_BLOCK]["workflow"] = draft.workflow;
   }
   if (draft.kind) {
-    obj["longform"]["kind"] = draft.kind;
+    obj[MANUSCRIPT_BLOCK]["kind"] = draft.kind;
   }
 
   if (draft.format === "scenes") {
-    obj["longform"]["sceneFolder"] = draft.sceneFolder;
-    obj["longform"]["scenes"] = indentedScenesToArrays(draft.scenes);
+    obj[MANUSCRIPT_BLOCK]["sceneFolder"] = draft.sceneFolder;
+    obj[MANUSCRIPT_BLOCK]["scenes"] = indentedScenesToArrays(draft.scenes);
     if (draft.sceneTemplate) {
-      obj["longform"]["sceneTemplate"] = draft.sceneTemplate;
+      obj[MANUSCRIPT_BLOCK]["sceneTemplate"] = draft.sceneTemplate;
     }
-    obj["longform"]["ignoredFiles"] = draft.ignoredFiles;
+    obj[MANUSCRIPT_BLOCK]["ignoredFiles"] = draft.ignoredFiles;
   }
 }
 

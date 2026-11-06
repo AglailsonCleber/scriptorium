@@ -5,6 +5,7 @@ import { todayStamp } from "src/model/capture";
 import {
   applyTemplate,
   assignPiece,
+  WRITTEN_KEY,
   contentsMarkdown,
   contentsOf,
   manuscriptText,
@@ -229,7 +230,7 @@ export async function markWritten(app: App, path: string): Promise<void> {
   }
   const written = todayStamp(new Date());
   await app.fileManager.processFrontMatter(file, (frontmatter) => {
-    frontmatter["longform-written"] = written;
+    frontmatter[WRITTEN_KEY] = written;
   });
 }
 

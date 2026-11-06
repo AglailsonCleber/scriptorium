@@ -1,20 +1,20 @@
 import { WHEN_KEY } from "./bible";
 import { POV_KEY, ROLE_KEY, compiles } from "./architecture";
 
-export const THREAD_KEY = "longform-threads";
-export const STORY_KEY = "longform-story";
-export const ARC_KEY = "longform-arcs";
-export const BEAT_KEY = "longform-beat";
-export const SCAFFOLD_KEY = "longform-scaffold";
-export const PLANT_KEY = "longform-plants";
-export const LEARN_KEY = "longform-learns";
-export const TURN_KEY = "longform-turns";
-export const PURPOSE_KEY = "longform-purpose";
-export const CHANGE_KEY = "longform-change";
-export const TENSION_KEY = "longform-tension";
-export const ENDING_KEY = "longform-ending";
-export const DISTANCE_KEY = "longform-distance";
-export const ENDINGS_KEY = "longform-endings";
+export const THREAD_KEY = "scriptorium-threads";
+export const STORY_KEY = "scriptorium-story";
+export const ARC_KEY = "scriptorium-arcs";
+export const BEAT_KEY = "scriptorium-beat";
+export const SCAFFOLD_KEY = "scriptorium-scaffold";
+export const PLANT_KEY = "scriptorium-plants";
+export const LEARN_KEY = "scriptorium-learns";
+export const TURN_KEY = "scriptorium-turns";
+export const PURPOSE_KEY = "scriptorium-purpose";
+export const CHANGE_KEY = "scriptorium-change";
+export const TENSION_KEY = "scriptorium-tension";
+export const ENDING_KEY = "scriptorium-ending";
+export const DISTANCE_KEY = "scriptorium-distance";
+export const ENDINGS_KEY = "scriptorium-endings";
 
 export const DISTANCES = ["close", "report", "camera"] as const;
 export type Distance = (typeof DISTANCES)[number];

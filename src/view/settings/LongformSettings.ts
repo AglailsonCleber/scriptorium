@@ -516,7 +516,7 @@ export class ScriptoriumSettingsTab extends PluginSettingTab {
         cb.addOption("data", "with Scriptorium settings");
         cb.addOption(
           "plugin-folder",
-          "as a .json file in the longform/ plugin folder"
+          "as a .json file in the scriptorium/ plugin folder"
         );
         cb.addOption("file", "as a file in your vault");
         cb.setValue(settings.sessionStorage);

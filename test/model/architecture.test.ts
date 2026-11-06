@@ -126,14 +126,14 @@ describe("form templates", () => {
     expect(frontmatter[FORM_KEY]).toBe("prose");
     applyTemplate(frontmatter, "chronicle", false);
     expect(frontmatter[FORM_KEY]).toBe("column");
-    expect(frontmatter["longform-ceiling"]).toBe(800);
+    expect(frontmatter["scriptorium-ceiling"]).toBe(800);
     expect(templateBody("chronicle")).toContain("What happened:");
   });
 
-  it("does not store the piece role inside the longform block", () => {
+  it("does not store the piece role inside the scriptorium block", () => {
     const frontmatter: Record<string, unknown> = {};
     applyTemplate(frontmatter, "scene", false);
-    expect(frontmatter["longform"]).toBeUndefined();
+    expect(frontmatter["scriptorium"]).toBeUndefined();
     expect(frontmatter[ROLE_KEY]).toBe("manuscript");
   });
 });

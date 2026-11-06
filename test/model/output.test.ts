@@ -18,10 +18,10 @@ import {
 describe("output", () => {
   it("builds an opening outside the scenes", () => {
     const opening = openingFromFrontmatter("A casa", {
-      "longform-author": "Ana",
-      "longform-dedication": "Para J.",
-      "longform-epigraph": "A rua era larga.",
-      "longform-epigraph-source": "Caderno",
+      "scriptorium-author": "Ana",
+      "scriptorium-dedication": "Para J.",
+      "scriptorium-epigraph": "A rua era larga.",
+      "scriptorium-epigraph-source": "Caderno",
     });
     const markdown = bookOpeningMarkdown(opening, ["Um", "Dois"]);
     expect(markdown).toContain("# A casa");

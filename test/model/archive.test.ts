@@ -13,7 +13,7 @@ import { readSuggestionReply } from "src/model/suggestion";
 
 describe("archive", () => {
   it("learns names and places and keeps a neologism once", () => {
-    expect(wordsIn({ "longform-words": ["sonâmbula", "  ", 3] })).toEqual(["sonâmbula"]);
+    expect(wordsIn({ "scriptorium-words": ["sonâmbula", "  ", 3] })).toEqual(["sonâmbula"]);
     expect(
       bookDictionary(["sonâmbula", "Sonâmbula"], [["Maria Silva"], ["Rio de Janeiro"]])
     ).toEqual(["sonâmbula", "Maria", "Silva", "Rio", "Janeiro"]);
