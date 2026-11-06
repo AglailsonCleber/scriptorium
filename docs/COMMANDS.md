@@ -35,6 +35,7 @@ Right-click a Scriptorium note and open **Insert** (**Inserir**). A **Marks** se
 | Hide note properties | Turns that setting on or off. While it is on, the properties block is hidden in editing and reading. The properties stay in the file. |
 | Toggle current line highlight | Turns **Highlight current line** on or off. The cursor line is tinted only while the setting is on. |
 | Toggle focus mode | Dims every paragraph except the one being written. |
+| Toggle first-line indent | Turns **Indent the first line** on or off. On prose and column pages, in editing and reading, the first line of each paragraph indents. A blank line starts the next paragraph. Later lines of that paragraph stay flush, and so do headings, lists, quotes, rules, fenced code, and the properties block. Verse and script stay flush. The size is **First-line indent** (0.5 to 4 em, 2 by default). The note is unchanged. |
 | Toggle typewriter mode | Keeps the cursor line centered. |
 | Set page form to prose | Prose. Novel and story, and also chronicle. |
 | Set page form to verse | Verse. Poetry. A line break belongs to the poem. |

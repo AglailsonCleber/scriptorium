@@ -115,6 +115,10 @@ export interface ScriptoriumPluginSettings {
   hideProperties: boolean;
   /** Dim every paragraph except the one being written. */
   focusMode: boolean;
+  /** Indent the first line of each prose paragraph. */
+  paragraphIndent: boolean;
+  /** First-line indent, in ems. */
+  paragraphIndentEm: number;
   /** Keep the cursor line vertically centered. */
   typewriterMode: boolean;
   /** Narrow the writing column to a readable measure. */
@@ -178,6 +182,8 @@ export const DEFAULT_SETTINGS: ScriptoriumPluginSettings = {
   highlightCurrentLine: false,
   hideProperties: false,
   focusMode: false,
+  paragraphIndent: false,
+  paragraphIndentEm: 2,
   typewriterMode: false,
   readingMeasure: false,
   measureWidth: 66,
@@ -225,6 +231,8 @@ export const TRACKED_SETTINGS_PATHS: (keyof ScriptoriumPluginSettings)[] = [
   "highlightCurrentLine",
   "hideProperties",
   "focusMode",
+  "paragraphIndent",
+  "paragraphIndentEm",
   "typewriterMode",
   "readingMeasure",
   "measureWidth",
@@ -265,6 +273,8 @@ export const PASSTHROUGH_SAVE_SETTINGS_PATHS: (keyof ScriptoriumPluginSettings)[
     "highlightCurrentLine",
     "hideProperties",
     "focusMode",
+    "paragraphIndent",
+    "paragraphIndentEm",
     "typewriterMode",
     "readingMeasure",
     "measureWidth",

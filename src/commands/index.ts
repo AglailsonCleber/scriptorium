@@ -121,6 +121,7 @@ import {
   toggleFocusMode,
   toggleHideProperties,
   toggleHighlightCurrentLine,
+  toggleParagraphIndent,
   toggleTypewriterMode,
 } from "./page-mode";
 
@@ -147,6 +148,7 @@ const commandBuilders = [
   toggleFocusMode,
   toggleTypewriterMode,
   toggleHideProperties,
+  toggleParagraphIndent,
   insertMarginNote,
   listMarginNotes,
   showPrivateComments,

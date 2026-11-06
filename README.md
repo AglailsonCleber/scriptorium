@@ -12,7 +12,7 @@ Major features include:
 - Scene, draft, and project [word counts](./docs/WORD_COUNTS.md#word-counts-for-projects-drafts-and-scenes), plus a session goal in words, minutes, lines, or stanzas;
 - An **Output** tab for the manuscript you send or give to a reader, and the [Compile](./docs/COMPILE.md) step workflow;
 - [Single-scene projects](./docs/SINGLE_SCENE_PROJECTS.md) for one poem, one story, or one column;
-- A writing page: hidden properties, a current-line highlight, focus, typewriter mode, a chosen page language, and private margin comments whose `%%? … %%` stays hidden until the cursor is on it.
+- A writing page: hidden properties, a current-line highlight, focus, a first-line paragraph indent on prose and column, typewriter mode, a chosen page language, and private margin comments whose `%%? … %%` stays hidden until the cursor is on it.
 
 The full usage guide, in Portuguese, is the [manual](./docs/MANUAL.md). The command list is [COMMANDS.md](./docs/COMMANDS.md). A short Getting Started follows.
 
@@ -93,6 +93,12 @@ You can rename drafts by right-clicking them in the Project tab and selecting Re
 
 > [!TIP]
 > You can find more compile steps for various use cases in the [community collection of compile steps](https://github.com/obsidian-community/longform-compile-steps).
+
+## The writing page
+
+Page settings apply only to notes in a Scriptorium project. They live under **Settings → Scriptorium → Page**. The [manual](./docs/MANUAL.md) lists each one.
+
+**Indent the first line** indents each paragraph on a prose or column page, in editing and in reading. **First-line indent** sets that distance from 0.5 to 4 em; 2 is the default. A blank line starts the next paragraph. The lines that follow in the same paragraph stay flush, and so do headings, lists, quotes, rules, fenced code, and the properties block. Verse and script stay flush. The note itself is unchanged. **Toggle first-line indent** switches the same setting.
 
 ## Scene-only Styling
 

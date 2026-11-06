@@ -99,7 +99,9 @@ import {
   appColorScheme,
   manuscriptContrastClass,
   pageModeClasses,
+  PARAGRAPH_INDENT,
   READING_MEASURE_PROPERTIES,
+  clampMeasure,
   readingMeasureVars,
 } from "./view/page-mode";
 
@@ -108,6 +110,8 @@ const PAGE_SETTING_KEYS: (keyof ScriptoriumPluginSettings)[] = [
   "highlightCurrentLine",
   "hideProperties",
   "focusMode",
+  "paragraphIndent",
+  "paragraphIndentEm",
   "typewriterMode",
   "readingMeasure",
   "measureWidth",
@@ -888,6 +892,18 @@ export default class ScriptoriumPlugin extends Plugin {
           el.dataset.longformFold = String(Math.floor(foldStanza));
         } else {
           delete el.dataset.longformFold;
+        }
+        const indent =
+          wantLeaf && pageSettings.paragraphIndent
+            ? `${clampMeasure(
+                pageSettings.paragraphIndentEm,
+                PARAGRAPH_INDENT
+              )}em`
+            : null;
+        if (indent) {
+          el.style.setProperty("--longform-paragraph-indent", indent);
+        } else {
+          el.style.removeProperty("--longform-paragraph-indent");
         }
         const measure = wantLeaf ? readingMeasureVars(pageSettings) : null;
         el.classList.toggle("longform-measure", Boolean(measure));

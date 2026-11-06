@@ -13,6 +13,7 @@ import { pluginSettings, userScriptSteps } from "src/model/stores";
 import { FolderSuggest } from "./folder-suggest";
 import { DEFAULT_SESSION_FILE } from "src/model/types";
 import { PAGE_LANGUAGE_OPTIONS } from "src/model/page-language";
+import { PARAGRAPH_INDENT } from "../page-mode";
 import { FileSuggest } from "./file-suggest";
 import { syncSceneIndices } from "src/model/store-vault-sync";
 
@@ -125,6 +126,34 @@ export class ScriptoriumSettingsTab extends PluginSettingTab {
             focusMode: value,
           }));
         });
+      });
+    new Setting(containerEl)
+      .setName("Indent the first line")
+      .setDesc(
+        "On prose and column pages, indent the first line of each paragraph. A blank line starts a new paragraph. Verse and script stay flush."
+      )
+      .addToggle((cb) => {
+        cb.setValue(settings.paragraphIndent);
+        cb.onChange((value) => {
+          pluginSettings.update((s) => ({
+            ...s,
+            paragraphIndent: value,
+          }));
+        });
+      });
+    new Setting(containerEl)
+      .setName("First-line indent")
+      .setDesc("How far the first line moves in. Applies when indent is on.")
+      .addSlider((cb) => {
+        cb.setLimits(PARAGRAPH_INDENT.min, PARAGRAPH_INDENT.max, 0.25)
+          .setValue(settings.paragraphIndentEm)
+          .setDynamicTooltip()
+          .onChange((value) => {
+            pluginSettings.update((s) => ({
+              ...s,
+              paragraphIndentEm: value,
+            }));
+          });
       });
     new Setting(containerEl)
       .setName("Typewriter mode")

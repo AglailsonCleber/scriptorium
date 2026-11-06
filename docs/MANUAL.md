@@ -61,6 +61,8 @@ Em **Settings → Scriptorium → Page**:
 | **Hide note properties** | Esconde o bloco de propriedades no topo da nota, na edição e na leitura. As propriedades continuam no arquivo. O comando **Hide note properties** faz o mesmo. |
 | **Highlight current line** | Acende a linha do cursor. Com a opção desligada, a linha não ganha cor. |
 | **Focus mode** | Esmaece os outros parágrafos. Uma linha em branco marca o fim do parágrafo. |
+| **Indent the first line** | Recua a primeira linha de cada parágrafo na prosa e na coluna, na edição e na leitura. Uma linha em branco abre outro parágrafo. As linhas seguintes do mesmo parágrafo ficam rentes. Título, lista, citação, régua, código cercado e o bloco de propriedades não recuam. Verso e roteiro ficam sem recuo. A nota não muda. |
+| **First-line indent** | Tamanho desse recuo, em em, de 0,5 a 4. O padrão é 2. Só vale com o recuo ligado. |
 | **Typewriter mode** | Mantém a linha do cursor no centro. |
 | **Reading measure** | Coluna estreita. As notas de fora do projeto ficam na largura normal. |
 | **Column width** | Largura do texto, em caracteres, de 40 a 100. |
@@ -72,7 +74,7 @@ Em **Settings → Scriptorium → Page**:
 | **Stronger contrast** | O texto e a página se separam mais. |
 | **Reduce motion** | Páginas e painéis do Scriptorium ficam parados. A opção do sistema também vale. |
 
-Atalhos equivalentes: **Toggle current line highlight**, **Toggle focus mode**, **Toggle typewriter mode**.
+Atalhos equivalentes: **Toggle current line highlight**, **Toggle focus mode**, **Toggle typewriter mode**, **Toggle first-line indent**.
 
 ### Forma da página
 

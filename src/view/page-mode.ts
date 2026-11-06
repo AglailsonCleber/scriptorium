@@ -3,6 +3,7 @@ export const PAGE_MODE_CLASSES = [
   "longform-focus",
   "longform-typewriter",
   "longform-hide-properties",
+  "longform-indent",
 ] as const;
 
 export type PageModeSettings = {
@@ -10,11 +11,13 @@ export type PageModeSettings = {
   focusMode: boolean;
   typewriterMode: boolean;
   hideProperties: boolean;
+  paragraphIndent: boolean;
 };
 
 export const MEASURE_WIDTH = { min: 40, max: 100, fallback: 66 };
 export const MEASURE_LINE_HEIGHT = { min: 1.2, max: 2.4, fallback: 1.7 };
 export const MEASURE_MARGIN = { min: 0, max: 120, fallback: 32 };
+export const PARAGRAPH_INDENT = { min: 0.5, max: 4, fallback: 2 };
 
 export type ReadingMeasureSettings = {
   readingMeasure: boolean;
@@ -101,7 +104,69 @@ export function pageModeClasses(settings: PageModeSettings): string[] {
   if (settings.hideProperties) {
     classes.push("longform-hide-properties");
   }
+  if (settings.paragraphIndent) {
+    classes.push("longform-indent");
+  }
   return classes;
+}
+
+const HEADING_LINE = /^#{1,6}(\s|$)/;
+const LIST_LINE = /^([-*+]|\d+[.)])\s/;
+const QUOTE_LINE = /^>/;
+const RULE_LINE = /^(-{3,}|\*{3,}|_{3,})$/;
+const FENCE_LINE = /^(```|~~~)/;
+
+/**
+ * First line of each prose paragraph.
+ * A blank line, a heading, a list, a quote, a rule, or a fence starts a new one.
+ * Frontmatter at the top of the note is skipped.
+ */
+export function paragraphFirstLines(
+  lineCount: number,
+  lineText: (index: number) => string
+): number[] {
+  const starts: number[] = [];
+  let frontmatter = false;
+  let fence = false;
+  let open = false;
+  for (let index = 0; index < lineCount; index += 1) {
+    const trimmed = lineText(index).trim();
+    if (index === 0 && trimmed === "---") {
+      frontmatter = true;
+      open = false;
+      continue;
+    }
+    if (frontmatter) {
+      if (trimmed === "---" || trimmed === "...") {
+        frontmatter = false;
+      }
+      open = false;
+      continue;
+    }
+    if (FENCE_LINE.test(trimmed)) {
+      fence = !fence;
+      open = false;
+      continue;
+    }
+    if (fence || trimmed === "") {
+      open = false;
+      continue;
+    }
+    if (
+      HEADING_LINE.test(trimmed) ||
+      LIST_LINE.test(trimmed) ||
+      QUOTE_LINE.test(trimmed) ||
+      RULE_LINE.test(trimmed)
+    ) {
+      open = false;
+      continue;
+    }
+    if (!open) {
+      starts.push(index);
+      open = true;
+    }
+  }
+  return starts;
 }
 
 /**

@@ -42,3 +42,8 @@ export const toggleHideProperties = togglePageMode(
   "hideProperties",
   "Hide note properties"
 );
+
+export const toggleParagraphIndent = togglePageMode(
+  "paragraphIndent",
+  "Toggle first-line indent"
+);

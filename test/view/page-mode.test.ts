@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   pageLineMarks,
   pageModeClasses,
+  paragraphFirstLines,
   paragraphSpan,
   manuscriptContrastClass,
   readingMeasureVars,
@@ -74,6 +75,7 @@ describe("page mode classes", () => {
         focusMode: false,
         typewriterMode: true,
         hideProperties: false,
+        paragraphIndent: false,
       })
     ).toEqual(["longform-highlight-line", "longform-typewriter"]);
     expect(
@@ -82,8 +84,43 @@ describe("page mode classes", () => {
         focusMode: false,
         typewriterMode: false,
         hideProperties: true,
+        paragraphIndent: true,
       })
-    ).toEqual(["longform-hide-properties"]);
+    ).toEqual(["longform-hide-properties", "longform-indent"]);
+  });
+});
+
+describe("first line of a paragraph", () => {
+  it("indents the first line and leaves the rest of the paragraph flush", () => {
+    const note = ["Um parágrafo", "que continua", "", "Outro"];
+    expect(paragraphFirstLines(note.length, (index) => note[index])).toEqual([
+      0, 3,
+    ]);
+  });
+
+  it("skips frontmatter, headings, lists, quotes, and fenced code", () => {
+    const note = [
+      "---",
+      "title: Livro",
+      "---",
+      "",
+      "# Capítulo",
+      "Abre o capítulo",
+      "e segue.",
+      "",
+      "- item",
+      "",
+      "> citação",
+      "",
+      "```",
+      "código",
+      "```",
+      "",
+      "Depois da cerca.",
+    ];
+    expect(paragraphFirstLines(note.length, (index) => note[index])).toEqual([
+      5, 16,
+    ]);
   });
 });
 

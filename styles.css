@@ -69,6 +69,24 @@
   line-height: var(--longform-line-height);
 }
 
+.longform-leaf.longform-indent:not(.longform-form-verse):not(.longform-form-script)
+  .cm-line.longform-paragraph-start {
+  text-indent: var(--longform-paragraph-indent, 2em);
+}
+
+.longform-leaf.longform-indent:not(.longform-form-verse):not(.longform-form-script)
+  .markdown-preview-sizer
+  p {
+  text-indent: var(--longform-paragraph-indent, 2em);
+}
+
+.longform-leaf.longform-indent .markdown-preview-sizer li,
+.longform-leaf.longform-indent .markdown-preview-sizer li p,
+.longform-leaf.longform-indent .markdown-preview-sizer blockquote,
+.longform-leaf.longform-indent .markdown-preview-sizer blockquote p {
+  text-indent: 0;
+}
+
 .longform-leaf.longform-manuscript-light,
 .longform-leaf.longform-manuscript-light .view-header,
 .longform-leaf.longform-manuscript-light .markdown-source-view,

@@ -2,9 +2,13 @@ import type { Extension } from "@codemirror/state";
 import { EditorView, ViewPlugin, type ViewUpdate } from "@codemirror/view";
 
 import { catalogLanguage } from "src/model/page-language";
-import { pageLineMarks } from "./page-mode";
+import { pageLineMarks, paragraphFirstLines } from "./page-mode";
 
-const MARK_CLASSES = ["longform-current-paragraph", "longform-current-line"];
+const MARK_CLASSES = [
+  "longform-current-paragraph",
+  "longform-current-line",
+  "longform-paragraph-start",
+];
 
 function leafOf(view: EditorView): Element | null {
   return view.dom.closest(".longform-leaf");
@@ -63,7 +67,19 @@ function paint(view: EditorView): void {
   markLanguage(view, leaf);
   const focus = leaf?.classList.contains("longform-focus") ?? false;
   const highlight = leaf?.classList.contains("longform-highlight-line") ?? false;
+  const indent =
+    (leaf?.classList.contains("longform-indent") ?? false) &&
+    !leaf?.classList.contains("longform-form-verse") &&
+    !leaf?.classList.contains("longform-form-script");
   const wanted = new Map<HTMLElement, string[]>();
+
+  const remember = (element: HTMLElement, name: string): void => {
+    const classes = wanted.get(element) ?? [];
+    if (classes.indexOf(name) < 0) {
+      classes.push(name);
+    }
+    wanted.set(element, classes);
+  };
 
   if (leaf && (focus || highlight)) {
     const doc = view.state.doc;
@@ -77,13 +93,23 @@ function paint(view: EditorView): void {
       if (!element) {
         continue;
       }
-      const classes = wanted.get(element) ?? [];
       for (const name of mark.classes.split(" ")) {
-        if (name.length > 0 && classes.indexOf(name) < 0) {
-          classes.push(name);
+        if (name.length > 0) {
+          remember(element, name);
         }
       }
-      wanted.set(element, classes);
+    }
+  }
+
+  if (leaf && indent) {
+    const doc = view.state.doc;
+    const starts = paragraphFirstLines(doc.lines, (index) => doc.line(index + 1).text);
+    for (const index of starts) {
+      const line = doc.line(index + 1);
+      const element = lineElementAt(view, line.from);
+      if (element) {
+        remember(element, "longform-paragraph-start");
+      }
     }
   }
 
