@@ -17,7 +17,8 @@
   import { drafts, selectedDraft } from "src/model/stores";
   import { activeFile } from "src/view/stores";
   import { useApp } from "src/view/utils";
-  import { createBibleCard, replaceNameInProject } from "src/commands/bible";
+  import { createBibleCard, deleteBibleCard, replaceNameInProject } from "src/commands/bible";
+  import ConfirmActionModal from "src/view/ConfirmActionModal";
 
   import { AskStringModal, ReplaceNameModal } from "./bible-modals";
 
@@ -111,6 +112,19 @@
       return;
     }
     void app.workspace.getLeaf(false).openFile(file);
+  }
+
+  function remove(card: BibleCard): void {
+    const name = card.names[0];
+    new ConfirmActionModal(
+      app,
+      "Delete this card",
+      `“${name}” goes to the system trash. The manuscript keeps the name where it is written.`,
+      "Delete",
+      () => {
+        void deleteBibleCard(app, card.path);
+      }
+    ).open();
   }
 
   function rename(card: BibleCard): void {
@@ -222,6 +236,9 @@
             <button type="button" class="longform-bible-link" on:click={() => rename(card)}>
               Replace this name in the book
             </button>
+            <button type="button" class="longform-bible-delete" on:click={() => remove(card)}>
+              Delete this card
+            </button>
           </article>
         {/each}
       {/if}
@@ -288,6 +305,7 @@
 
   .longform-bible-open,
   .longform-bible-link,
+  .longform-bible-delete,
   .longform-bible-actions button {
     white-space: normal;
     overflow-wrap: anywhere;
@@ -307,5 +325,9 @@
 
   .is-fact {
     color: var(--text-accent);
+  }
+
+  .longform-bible-delete {
+    color: var(--text-error);
   }
 </style>

@@ -90,7 +90,7 @@ export class ScriptoriumSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Hide note properties")
       .setDesc(
-        "On notes inside a Scriptorium project, hide the properties block at the top of the page. The properties stay in the file."
+        "On a manuscript note and on a bible card, hide the properties block at the top of the page. The properties stay in the file."
       )
       .addToggle((cb) => {
         cb.setValue(settings.hideProperties);
@@ -116,7 +116,7 @@ export class ScriptoriumSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Focus mode")
       .setDesc(
-        "Dim every paragraph except the one you are writing. A blank line marks the edge of the paragraph."
+        "Dim every paragraph except the one you are writing. In prose, a line break starts the next paragraph. In a column, a blank line does."
       )
       .addToggle((cb) => {
         cb.setValue(settings.focusMode);
@@ -130,7 +130,7 @@ export class ScriptoriumSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Indent the first line")
       .setDesc(
-        "On prose and column pages, indent the first line of each paragraph. A blank line starts a new paragraph. Verse and script stay flush."
+        "Indent the first line of each paragraph. In prose, a line break starts the next one. In a column, a blank line does. Verse and script stay flush."
       )
       .addToggle((cb) => {
         cb.setValue(settings.paragraphIndent);

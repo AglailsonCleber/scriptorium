@@ -18,15 +18,16 @@ import {
   insertSingleSceneTemplate,
 } from "./templates";
 import { startNewSession } from "./word-counts";
-import { deleteProjectCommand } from "./delete-project";
+import { deleteDraftCommand, deleteProjectCommand } from "./delete-project";
 import {
   insertMarginNote,
   listMarginNotes,
   showPrivateComments,
 } from "./margin-note";
 import { insertMissingWord } from "./missing-word";
+import { indentThisParagraph } from "./indent-paragraph";
 import { insertDialogueDash, insertHyphen, insertQuotes } from "./portuguese";
-import { openCardAtCursor, replaceBookName } from "./bible";
+import { deleteThisBibleCard, openCardAtCursor, replaceBookName } from "./bible";
 import {
   captureToInbox,
   dictateDraft,
@@ -144,6 +145,7 @@ const commandBuilders = [
   insertSingleSceneTemplate,
   startNewSession,
   deleteProjectCommand,
+  deleteDraftCommand,
   toggleHighlightCurrentLine,
   toggleFocusMode,
   toggleTypewriterMode,
@@ -156,7 +158,9 @@ const commandBuilders = [
   insertDialogueDash,
   insertHyphen,
   insertQuotes,
+  indentThisParagraph,
   openCardAtCursor,
+  deleteThisBibleCard,
   replaceBookName,
   captureToInbox,
   dictateDraft,

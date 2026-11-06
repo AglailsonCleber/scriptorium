@@ -67,6 +67,8 @@ function paint(view: EditorView): void {
   markLanguage(view, leaf);
   const focus = leaf?.classList.contains("longform-focus") ?? false;
   const highlight = leaf?.classList.contains("longform-highlight-line") ?? false;
+  const prose = leaf?.classList.contains("longform-form-prose") ?? false;
+  const edge = prose ? "line" : "blank";
   const indent =
     (leaf?.classList.contains("longform-indent") ?? false) &&
     !leaf?.classList.contains("longform-form-verse") &&
@@ -84,8 +86,11 @@ function paint(view: EditorView): void {
   if (leaf && (focus || highlight)) {
     const doc = view.state.doc;
     const cursorLine = doc.lineAt(view.state.selection.main.head).number - 1;
-    const marks = pageLineMarks(doc.lines, cursorLine, { focus, highlight }, (index) =>
-      doc.line(index + 1).text
+    const marks = pageLineMarks(
+      doc.lines,
+      cursorLine,
+      { focus, highlight, edge },
+      (index) => doc.line(index + 1).text
     );
     for (const mark of marks) {
       const line = view.state.doc.line(mark.line + 1);
@@ -103,7 +108,11 @@ function paint(view: EditorView): void {
 
   if (leaf && indent) {
     const doc = view.state.doc;
-    const starts = paragraphFirstLines(doc.lines, (index) => doc.line(index + 1).text);
+    const starts = paragraphFirstLines(
+      doc.lines,
+      (index) => doc.line(index + 1).text,
+      edge
+    );
     for (const index of starts) {
       const line = doc.line(index + 1);
       const element = lineElementAt(view, line.from);

@@ -20,7 +20,7 @@ In addition to the above, multi-scene projects have some additional frontmatter 
 
 | Name          | Type                          | Required? | Description                                                                                                                                            |
 | ------------- | ----------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| sceneFolder   | `string`                      | false     | The path—relative to the index file—where your scenes live. If it is omitted, Scriptorium uses the index file’s own folder.                               |
+| sceneFolder   | `string`                      | false     | The path—relative to the index file—where your scenes live. If it is omitted, or is `/`, Scriptorium uses the index file’s own folder. In **Project**, an existing folder is used as it is. A folder that is not there yet is created. Scenes already in the list are not moved. |
 | scenes        | `string[]` (array of strings) | true      | Nested arrays of scene file names (without .md extensions).                                                                                            |
 | sceneTemplate | `string`                      | false     | Path to file to use as a template for newly-created scenes in this project.                                                                            |
 | ignoredFiles  | `string[]` (array of strings) | false     | If present, a list of scene names (without .md extensions, wildcards are allowed) to ignore when prompting to add newly-created files to your project. |

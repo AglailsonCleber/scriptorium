@@ -90,6 +90,17 @@ export function manuscriptContrastClass(
   return scheme === "dark" ? MANUSCRIPT_LIGHT_CLASS : MANUSCRIPT_DARK_CLASS;
 }
 
+/**
+ * Hide the properties block on a manuscript note, and on a bible card.
+ * A bible card is not a scene, so the rest of the writing page stays off.
+ */
+export function hidePropertiesOnNote(
+  note: { manuscript: boolean; bibleCard: boolean },
+  enabled: boolean
+): boolean {
+  return enabled && (note.manuscript || note.bibleCard);
+}
+
 export function pageModeClasses(settings: PageModeSettings): string[] {
   const classes: string[] = [];
   if (settings.highlightCurrentLine) {
@@ -110,20 +121,81 @@ export function pageModeClasses(settings: PageModeSettings): string[] {
   return classes;
 }
 
+/** Prose starts a paragraph at every line break. A column still waits for a blank line. */
+export type ParagraphEdge = "line" | "blank";
+
 const HEADING_LINE = /^#{1,6}(\s|$)/;
 const LIST_LINE = /^([-*+]|\d+[.)])\s/;
 const QUOTE_LINE = /^>/;
 const RULE_LINE = /^(-{3,}|\*{3,}|_{3,})$/;
 const FENCE_LINE = /^(```|~~~)/;
+const QUARTER_EM = "\u2005";
+
+/** Spaces that stand in for the first-line indent when the automatic indent is off. */
+export function firstLineIndentText(em: number): string {
+  const size = clampMeasure(em, PARAGRAPH_INDENT);
+  const quarters = Math.round(size * 4);
+  let text = "";
+  for (let index = 0; index < quarters; index += 1) {
+    text += QUARTER_EM;
+  }
+  return text;
+}
+
+const MANUAL_INDENT = /^[\u2002\u2003\u2005]+/;
+
+/** The same line with a first-line indent, or null when it should stay as it is. */
+export function withFirstLineIndent(line: string, indent: string): string | null {
+  const trimmed = line.trim();
+  if (
+    trimmed === "" ||
+    HEADING_LINE.test(trimmed) ||
+    LIST_LINE.test(trimmed) ||
+    QUOTE_LINE.test(trimmed) ||
+    RULE_LINE.test(trimmed) ||
+    FENCE_LINE.test(trimmed)
+  ) {
+    return null;
+  }
+  const next = indent + line.replace(MANUAL_INDENT, "");
+  if (next === line) {
+    return null;
+  }
+  return next;
+}
+
+/** First lines of the paragraphs the selection touches. */
+export function paragraphStartsInSelection(
+  lineCount: number,
+  fromLine: number,
+  toLine: number,
+  lineText: (index: number) => string,
+  edge: ParagraphEdge
+): number[] {
+  const allowed = paragraphFirstLines(lineCount, lineText, edge);
+  const starts: number[] = [];
+  const low = Math.min(fromLine, toLine);
+  const high = Math.max(fromLine, toLine);
+  for (let line = low; line <= high; line += 1) {
+    const start = paragraphSpan(lineCount, line, lineText, edge).from;
+    if (starts.indexOf(start) >= 0 || allowed.indexOf(start) < 0) {
+      continue;
+    }
+    starts.push(start);
+  }
+  return starts;
+}
 
 /**
- * First line of each prose paragraph.
- * A blank line, a heading, a list, a quote, a rule, or a fence starts a new one.
+ * First line of each paragraph.
+ * In prose, every line break starts one. In a column, a blank line does.
+ * A heading, a list, a quote, a rule, or a fence is not a paragraph.
  * Frontmatter at the top of the note is skipped.
  */
 export function paragraphFirstLines(
   lineCount: number,
-  lineText: (index: number) => string
+  lineText: (index: number) => string,
+  edge: ParagraphEdge = "blank"
 ): number[] {
   const starts: number[] = [];
   let frontmatter = false;
@@ -161,29 +233,30 @@ export function paragraphFirstLines(
       open = false;
       continue;
     }
-    if (!open) {
+    if (edge === "line" || !open) {
       starts.push(index);
-      open = true;
     }
+    open = edge === "blank";
   }
   return starts;
 }
 
 /**
  * Inclusive line indexes of the paragraph containing `lineIndex`.
- * A blank line is a boundary. The cursor sitting on a blank line
- * keeps that line alone.
+ * Prose keeps the cursor line alone. A column grows until a blank line.
+ * The cursor sitting on a blank line keeps that line alone.
  */
 export function paragraphSpan(
   lineCount: number,
   lineIndex: number,
-  lineText: (index: number) => string
+  lineText: (index: number) => string,
+  edge: ParagraphEdge = "blank"
 ): { from: number; to: number } {
   if (lineCount <= 0) {
     return { from: 0, to: 0 };
   }
   const index = Math.min(Math.max(lineIndex, 0), lineCount - 1);
-  if (lineText(index).trim() === "") {
+  if (edge === "line" || lineText(index).trim() === "") {
     return { from: index, to: index };
   }
   let from = index;
@@ -206,7 +279,7 @@ export type PageLineMark = {
 export function pageLineMarks(
   lineCount: number,
   cursorLine: number,
-  mode: { focus: boolean; highlight: boolean },
+  mode: { focus: boolean; highlight: boolean; edge?: ParagraphEdge },
   lineText: (index: number) => string
 ): PageLineMark[] {
   if (lineCount <= 0 || (!mode.focus && !mode.highlight)) {
@@ -214,7 +287,7 @@ export function pageLineMarks(
   }
   const index = Math.min(Math.max(cursorLine, 0), lineCount - 1);
   if (mode.focus) {
-    const span = paragraphSpan(lineCount, index, lineText);
+    const span = paragraphSpan(lineCount, index, lineText, mode.edge ?? "blank");
     const marks: PageLineMark[] = [];
     for (let line = span.from; line <= span.to; line += 1) {
       const classes = ["longform-current-paragraph"];

@@ -35,6 +35,8 @@ Também dá para criar o índice à mão com **Insert multi-scene frontmatter** 
 
 O bloco `scriptorium` do índice é a espinha do projeto. Evite editá-lo direto. O plugin não apaga arquivos quando o índice muda, mas uma edição errada desorganiza a ordem.
 
+Para apagar um rascunho, use **Delete draft** na aba **Project**, o menu de contexto do rascunho, ou o comando **Delete this draft**. O plugin pede confirmação e leva para a lixeira o índice e as cenas desse rascunho. Os outros rascunhos ficam, assim como a bíblia e a pesquisa do projeto. Se aquele for o único rascunho, o projeto inteiro sai junto.
+
 Para apagar o projeto inteiro, use **Delete project** na aba **Project**, ou o comando **Delete this project**. O plugin pede confirmação e leva para a lixeira do sistema o índice, as cenas, e as pastas Pesquisa, Bíblia, Reading, Output e Workshop de cada rascunho desse título. Notas de pesquisa e fichas marcadas como deste projeto também saem. Arquivos seus que estejam na mesma pasta e não pertençam ao projeto ficam. A pasta do projeto só some se ficar vazia.
 
 ### Cenas
@@ -42,6 +44,7 @@ Para apagar o projeto inteiro, use **Delete project** na aba **Project**, ou o c
 Na aba **Scenes**:
 
 - Digite o título no campo de cena nova e confirme. A nota abre pronta para escrever.
+- **Scene Folder**, em **Project**, escolhe a pasta das cenas. Se ela já existe, o projeto passa a usá-la. Se não existe, o plugin cria, inclusive as pastas intermediárias. As cenas que já estão na lista não são movidas. `/` deixa as cenas ao lado do índice.
 - Arraste para reordenar. Arraste para a direita, ou use **Indent scene** / **Unindent scene**, para aninhar capítulo, parte e cena. **Show scene numbers in Scenes tab** numera essas peças, por exemplo `1.1.2`.
 - **New scene template**, em **Settings → Scriptorium → Composition**, é o modelo das cenas novas. Cada projeto pode trocar o modelo em **Project**. **Write scene index to frontmatter** grava o índice e o número da cena nas propriedades da nota.
 - **Previous scene** e **Next scene** saltam na ordem do manuscrito. As variantes “at indent level” ficam no mesmo nível.
@@ -58,10 +61,10 @@ Em **Settings → Scriptorium → Page**:
 
 | Opção | O que faz |
 | --- | --- |
-| **Hide note properties** | Esconde o bloco de propriedades no topo da nota, na edição e na leitura. As propriedades continuam no arquivo. O comando **Hide note properties** faz o mesmo. |
+| **Hide note properties** | Esconde o bloco de propriedades no topo da nota, na edição e na leitura, no manuscrito e nas fichas da bíblia. As propriedades continuam no arquivo. O comando **Hide note properties** faz o mesmo. |
 | **Highlight current line** | Acende a linha do cursor. Com a opção desligada, a linha não ganha cor. |
-| **Focus mode** | Esmaece os outros parágrafos. Uma linha em branco marca o fim do parágrafo. |
-| **Indent the first line** | Recua a primeira linha de cada parágrafo na prosa e na coluna, na edição e na leitura. Uma linha em branco abre outro parágrafo. As linhas seguintes do mesmo parágrafo ficam rentes. Título, lista, citação, régua, código cercado e o bloco de propriedades não recuam. Verso e roteiro ficam sem recuo. A nota não muda. |
+| **Focus mode** | Esmaece os outros parágrafos. Na prosa, a quebra de linha abre outro parágrafo. Na coluna, isso continua sendo uma linha em branco. |
+| **Indent the first line** | Recua a primeira linha de cada parágrafo na prosa e na coluna, na edição e na leitura. Na prosa, cada quebra de linha é um parágrafo. Na coluna, uma linha em branco abre outro, e as linhas seguintes ficam rentes. Título, lista, citação, régua, código cercado e o bloco de propriedades não recuam. Verso e roteiro ficam sem recuo. A nota não muda. |
 | **First-line indent** | Tamanho desse recuo, em em, de 0,5 a 4. O padrão é 2. Só vale com o recuo ligado. |
 | **Typewriter mode** | Mantém a linha do cursor no centro. |
 | **Reading measure** | Coluna estreita. As notas de fora do projeto ficam na largura normal. |
@@ -97,6 +100,7 @@ Clique com o botão direito na nota. No submenu **Insert** (**Inserir**), uma se
 - **Insert margin note** — comentário privado na margem. Na edição, o código `%%? … %%` fica oculto e só aparece com o cursor em cima, como o endereço de um link. A compilação e a leitura contínua tiram esse código. A exportação de **Output** leva o código junto.
 - **Insert quotes** — aspas no trecho selecionado, ou um par vazio com o cursor no meio.
 - **Insert missing word** — um `TK` pesquisável no lugar da palavra que ainda não veio.
+- **Indent this paragraph** — recua só a primeira linha do parágrafo selecionado. Aparece quando **Indent the first line** está desligado, na prosa e na coluna. O tamanho é o de **First-line indent**. Verso e roteiro não recebem esse comando.
 
 Os comandos continuam na paleta:
 
@@ -155,6 +159,7 @@ Aba **Bible**. Aparece em **Novel**, **Story**, **Chronicle**, **Script** e em p
 
 - Criar e abrir fichas pelo painel.
 - **Open card at cursor** abre a ficha do nome sob o cursor.
+- **Delete this card**, na ficha do painel, ou **Delete this bible card** com a ficha aberta, pede confirmação e manda a nota para a lixeira do sistema. Vale para pessoa, lugar, coisa e mundo. O nome continua no manuscrito onde já foi escrito.
 - **Replace a name in the book** troca um nome em todas as cenas do projeto. Use quando o nome do livro mudou, não para um experimento local.
 - **Try a name** testa um nome antes de gravá-lo na prosa.
 - **Dialogue check** olha falas contra as fichas.
@@ -313,7 +318,7 @@ Pesquisa e inbox ficam de fora porque não são cenas do manuscrito. A cópia co
 
 Quase tudo o que o painel grava é uma propriedade ao lado do bloco `scriptorium`, no índice ou na cena. **Hide note properties** só esconde esse bloco na tela. Apagar a propriedade na nota apaga o dado.
 
-Não edite o bloco `scriptorium` para mudar ordem de cenas, papel ou forma. Use as abas. Com **Hide note properties** ligado, o bloco e o YAML do topo ficam fora da visualização de edição e da de leitura. As propriedades continuam no arquivo. Para vê-las, desligue a opção.
+Não edite o bloco `scriptorium` para mudar ordem de cenas, papel ou forma. Use as abas. Com **Hide note properties** ligado, o bloco e o YAML do topo ficam fora da visualização de edição e da de leitura, no manuscrito e na ficha da bíblia. As propriedades continuam no arquivo. Para vê-las, desligue a opção.
 
 Em **Settings → Scriptorium → Troubleshooting**, **Wait for Obsidian Sync** segura o plugin até a primeira sincronização terminar. **Enable fallback wait** e **Fallback wait time** esperam os segundos indicados quando o estado da sincronização não aparece.
 

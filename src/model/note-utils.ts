@@ -1,6 +1,7 @@
 import { last, sum } from "lodash";
 import type { App, TFile } from "obsidian";
 
+import { ensureVaultFolder } from "./scene-folder-vault";
 import type { Draft, DraftWordCounts } from "./types";
 
 export function fileNameFromPath(path: string): string {
@@ -56,14 +57,11 @@ export async function createNote(
 ): Promise<TFile | null> {
   const pathComponents = path.split("/");
   pathComponents.pop();
+  const parent = pathComponents.join("/");
 
-  if (!(await app.vault.adapter.exists(pathComponents.join("/")))) {
-    try {
-      await app.vault.createFolder(pathComponents.join("/"));
-    } catch (e) {
-      console.error(`[Scriptorium] Failed to create new note at "${path}"`, e);
-      return null;
-    }
+  if (parent.length > 0 && !(await ensureVaultFolder(app, parent))) {
+    console.error(`[Scriptorium] Failed to create new note at "${path}"`);
+    return null;
   }
 
   try {

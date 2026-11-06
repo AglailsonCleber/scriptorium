@@ -17,15 +17,18 @@
 
   let editingPath: string | null = null;
 
-  const showDraftMenu: (x: number, y: number, action: () => void) => void =
-    getContext("showDraftMenu");
-  function onContext(event: MouseEvent) {
+  const showDraftMenu: (
+    x: number,
+    y: number,
+    draft: Draft,
+    action: () => void
+  ) => void = getContext("showDraftMenu");
+  function onContext(event: MouseEvent, draft: Draft) {
     const { x, y } = event;
-    const element = document.elementFromPoint(x, y);
-    showDraftMenu(x, y, () => {
-      if (element && element instanceof HTMLElement) {
-        const draftPath = element.dataset.draftPath;
-        editingPath = draftPath;
+    const element = event.currentTarget;
+    showDraftMenu(x, y, draft, () => {
+      if (element instanceof HTMLElement) {
+        editingPath = draft.vaultPath;
         setTimeout(() => selectElementContents(element), 0);
       }
     });
@@ -79,7 +82,7 @@
             class:selected={$selectedDraft &&
               $selectedDraft.vaultPath === draft.vaultPath}
             on:click={() => onDraftClick(draft)}
-            on:contextmenu|preventDefault={onContext}
+            on:contextmenu|preventDefault={(event) => onContext(event, draft)}
             on:keydown={draft.vaultPath === editingPath ? onKeydown : null}
             on:blur={draft.vaultPath === editingPath ? onBlur : null}
             data-draft-path={draft.vaultPath}

@@ -1,10 +1,14 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  firstLineIndentText,
+  hidePropertiesOnNote,
   pageLineMarks,
   pageModeClasses,
   paragraphFirstLines,
   paragraphSpan,
+  paragraphStartsInSelection,
+  withFirstLineIndent,
   manuscriptContrastClass,
   readingMeasureVars,
 } from "src/view/page-mode";
@@ -21,6 +25,17 @@ describe("paragraph span", () => {
 
   it("treats the blank line under the cursor as its own span", () => {
     expect(paragraphSpan(lines.length, 2, text)).toEqual({ from: 2, to: 2 });
+  });
+
+  it("keeps a prose line on its own", () => {
+    expect(paragraphSpan(lines.length, 0, text, "line")).toEqual({
+      from: 0,
+      to: 0,
+    });
+    expect(paragraphSpan(lines.length, 1, text, "line")).toEqual({
+      from: 1,
+      to: 1,
+    });
   });
 });
 
@@ -67,6 +82,26 @@ describe("page line marks", () => {
   });
 });
 
+describe("hidden properties", () => {
+  it("hides the block on a manuscript note and on a bible card", () => {
+    expect(
+      hidePropertiesOnNote({ manuscript: true, bibleCard: false }, true)
+    ).toBe(true);
+    expect(
+      hidePropertiesOnNote({ manuscript: false, bibleCard: true }, true)
+    ).toBe(true);
+  });
+
+  it("leaves the block visible when the setting is off", () => {
+    expect(
+      hidePropertiesOnNote({ manuscript: false, bibleCard: true }, false)
+    ).toBe(false);
+    expect(
+      hidePropertiesOnNote({ manuscript: false, bibleCard: false }, true)
+    ).toBe(false);
+  });
+});
+
 describe("page mode classes", () => {
   it("lists only the modes that are on", () => {
     expect(
@@ -90,7 +125,36 @@ describe("page mode classes", () => {
   });
 });
 
+describe("manual first-line indent", () => {
+  const note = ["Um parágrafo", "que continua", "", "# Título", "Outro"];
+  const text = (index: number) => note[index];
+
+  it("uses the chosen width in quarter ems", () => {
+    expect(firstLineIndentText(2).length).toBe(8);
+    expect(firstLineIndentText(0.5).length).toBe(2);
+  });
+
+  it("indents one prose line and leaves a heading alone", () => {
+    const indent = firstLineIndentText(2);
+    expect(withFirstLineIndent("Um parágrafo", indent)).toBe(indent + "Um parágrafo");
+    expect(withFirstLineIndent(indent + "Um parágrafo", indent)).toBeNull();
+    expect(withFirstLineIndent("# Título", indent)).toBeNull();
+  });
+
+  it("indents only the paragraph the selection touches", () => {
+    expect(paragraphStartsInSelection(note.length, 1, 1, text, "line")).toEqual([1]);
+    expect(paragraphStartsInSelection(note.length, 1, 1, text, "blank")).toEqual([0]);
+  });
+});
+
 describe("first line of a paragraph", () => {
+  it("treats each prose line as its own paragraph", () => {
+    const note = ["Um parágrafo", "que continua", "", "Outro"];
+    expect(
+      paragraphFirstLines(note.length, (index) => note[index], "line")
+    ).toEqual([0, 1, 3]);
+  });
+
   it("indents the first line and leaves the rest of the paragraph flush", () => {
     const note = ["Um parágrafo", "que continua", "", "Outro"];
     expect(paragraphFirstLines(note.length, (index) => note[index])).toEqual([

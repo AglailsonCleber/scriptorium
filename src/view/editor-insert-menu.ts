@@ -8,10 +8,12 @@ import {
   type InsertCandidate,
   type InsertSectionEntry,
 } from "src/model/insert-menu";
+import { indentSelectedParagraph } from "src/commands/indent-paragraph";
 import {
   insertDialogueDashInto,
   insertQuotesInto,
 } from "src/commands/portuguese";
+import type { ParagraphEdge } from "./page-mode";
 
 const MARK_SECTION = "longform-marks";
 
@@ -134,7 +136,14 @@ function ensureSection(menu: LiveMenu, section: string): void {
   }
 }
 
-function addMarks(menu: Menu, editor: Editor, section: string, label: boolean): void {
+function addMarks(
+  menu: Menu,
+  editor: Editor,
+  section: string,
+  label: boolean,
+  edge: ParagraphEdge,
+  manualIndent: boolean
+): void {
   const host = menu as LiveMenu;
   const wasShown = host.shown === true;
   if (wasShown) {
@@ -159,6 +168,18 @@ function addMarks(menu: Menu, editor: Editor, section: string, label: boolean): 
         });
     });
   }
+  if (manualIndent) {
+    menu.addItem((item: MenuItem) => {
+      item
+        .setTitle("Indent this paragraph")
+        .setIcon("indent")
+        .setSection(section)
+        .onClick(() => {
+          indentSelectedParagraph(editor, edge);
+          editor.focus();
+        });
+    });
+  }
   if (wasShown) {
     host.shown = true;
   }
@@ -169,17 +190,24 @@ function addMarks(menu: Menu, editor: Editor, section: string, label: boolean): 
  * Current Obsidian builds Inserir from a section at show time, so the items
  * join that section. Older menus still expose a real submenu.
  */
-export function addWritingMarks(menu: Menu, editor: Editor): void {
+export function addWritingMarks(
+  menu: Menu,
+  editor: Editor,
+  options: { edge: ParagraphEdge; manualIndent: boolean } = {
+    edge: "line",
+    manualIndent: false,
+  }
+): void {
   const rows = liveItems(menu);
   const index = insertMenuIndex(rows.map((row) => row.candidate));
   const submenu = index >= 0 ? rows[index].item.submenu : null;
   if (submenu) {
-    addMarks(submenu, editor, MARK_SECTION, false);
+    addMarks(submenu, editor, MARK_SECTION, false, options.edge, options.manualIndent);
     return;
   }
   const section = insertSection(menu as LiveMenu);
   if (!section) {
     return;
   }
-  addMarks(menu, editor, section, true);
+  addMarks(menu, editor, section, true, options.edge, options.manualIndent);
 }

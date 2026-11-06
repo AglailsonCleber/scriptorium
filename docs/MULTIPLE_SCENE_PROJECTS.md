@@ -6,6 +6,8 @@ Creating a project starts with a kind: **Novel**, **Poetry**, **Story**, **Chron
 
 Multi-scene projects have a **Scenes** tab.
 
+**Scene Folder**, in the **Project** tab, is the folder those notes live in, relative to the index. An existing folder is used as it is, and its notes can be added from the prompt Scriptorium shows for unknown files. A folder that is not there yet is created, including any missing parent folders. `/` keeps the scenes beside the index. Changing the folder does not move scenes that are already in the list.
+
 ## Scene Ordering
 
 Fundamentally, scenes are a manually-ordered set of notes. The Scenes tab allows you to reorder these notes with drag-and-drop. Your list of scenes corresponds to a frontmatter array in your [index file](./INDEX_FILE.md), so:

@@ -98,6 +98,7 @@ import {
   PAGE_MODE_CLASSES,
   appColorScheme,
   manuscriptContrastClass,
+  hidePropertiesOnNote,
   pageModeClasses,
   PARAGRAPH_INDENT,
   READING_MEASURE_PROPERTIES,
@@ -261,7 +262,16 @@ export default class ScriptoriumPlugin extends Plugin {
         if (!path || !draftForPath(path, get(drafts))) {
           return;
         }
-        addWritingMarks(menu, editor);
+        const form = pageForm(
+          this.app.metadataCache.getFileCache(info.file)?.frontmatter?.[PAGE_FORM_KEY]
+        );
+        addWritingMarks(menu, editor, {
+          edge: form === "prose" ? "line" : "blank",
+          manualIndent:
+            !get(pluginSettings).paragraphIndent &&
+            form !== "verse" &&
+            form !== "script",
+        });
       })
     );
     this.registerEditorExtension(longformPageExtension);
@@ -332,6 +342,8 @@ export default class ScriptoriumPlugin extends Plugin {
     this.registerEvent(
       this.app.vault.on("delete", (file) => {
         this.pageRecovery.forget(file.path);
+        bibleCards.update((cards) => cards.filter((card) => card.path !== file.path));
+        this.refreshBookDictionary();
       })
     );
 
@@ -822,6 +834,15 @@ export default class ScriptoriumPlugin extends Plugin {
         const capture = captureFromFrontmatter(leaf.view.file.path, frontmatter);
         const isExercise = capture?.kind === "exercise";
         const wantLeaf = Boolean(draft) || isExercise;
+        const hideProperties = hidePropertiesOnNote(
+          {
+            manuscript: wantLeaf,
+            bibleCard: Boolean(
+              cardFromFrontmatter(leaf.view.file.path, frontmatter)
+            ),
+          },
+          modes.includes("longform-hide-properties")
+        );
         const wantPath = draft ? leaf.view.file.path : "";
         if ((el.dataset.longformPath ?? "") !== wantPath) {
           if (wantPath.length > 0) {
@@ -836,7 +857,10 @@ export default class ScriptoriumPlugin extends Plugin {
           pageClassesChanged = true;
         }
         for (const cls of PAGE_MODE_CLASSES) {
-          const want = wantLeaf && modes.includes(cls);
+          const want =
+            cls === "longform-hide-properties"
+              ? hideProperties
+              : wantLeaf && modes.includes(cls);
           if (el.classList.contains(cls) !== want) {
             el.classList.toggle(cls, want);
             pageClassesChanged = true;

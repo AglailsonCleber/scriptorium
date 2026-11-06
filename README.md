@@ -98,7 +98,7 @@ You can rename drafts by right-clicking them in the Project tab and selecting Re
 
 Page settings apply only to notes in a Scriptorium project. They live under **Settings → Scriptorium → Page**. The [manual](./docs/MANUAL.md) lists each one.
 
-**Indent the first line** indents each paragraph on a prose or column page, in editing and in reading. **First-line indent** sets that distance from 0.5 to 4 em; 2 is the default. A blank line starts the next paragraph. The lines that follow in the same paragraph stay flush, and so do headings, lists, quotes, rules, fenced code, and the properties block. Verse and script stay flush. The note itself is unchanged. **Toggle first-line indent** switches the same setting.
+**Indent the first line** indents each paragraph on a prose or column page, in editing and in reading. **First-line indent** sets that distance from 0.5 to 4 em; 2 is the default. In prose, a line break starts the next paragraph. In a column, a blank line does, and the lines that follow stay flush. Headings, lists, quotes, rules, fenced code, and the properties block stay flush. Verse and script stay flush. The note itself is unchanged. **Toggle first-line indent** switches the same setting.
 
 ## Scene-only Styling
 

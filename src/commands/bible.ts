@@ -4,6 +4,7 @@ import { get } from "svelte/store";
 import {
   CARD_KEY,
   cardFileName,
+  cardFromFrontmatter,
   cardsForProject,
   nameHitsInLine,
   replaceWholeName,
@@ -14,6 +15,7 @@ import { draftForPath, scenePath } from "src/model/scene-navigation";
 import { drafts } from "src/model/stores";
 import type { Draft } from "src/model/types";
 import { ReplaceNameModal } from "src/view/bible/bible-modals";
+import ConfirmActionModal from "src/view/ConfirmActionModal";
 
 import type { CommandBuilder } from "./types";
 
@@ -128,6 +130,16 @@ export async function replaceNameInProject(
   return count;
 }
 
+export async function deleteBibleCard(app: App, path: string): Promise<boolean> {
+  const file = app.vault.getAbstractFileByPath(path);
+  if (!(file instanceof TFile)) {
+    new Notice("That card is not in the vault.");
+    return false;
+  }
+  await app.vault.trash(file, true);
+  return true;
+}
+
 export const openCardAtCursor: CommandBuilder = (plugin) => ({
   id: "longform-open-card",
   name: "Open card at cursor",
@@ -152,6 +164,37 @@ export const openCardAtCursor: CommandBuilder = (plugin) => ({
     if (target instanceof TFile) {
       void plugin.app.workspace.getLeaf(false).openFile(target);
     }
+  },
+});
+
+export const deleteThisBibleCard: CommandBuilder = (plugin) => ({
+  id: "longform-delete-bible-card",
+  name: "Delete this bible card",
+  checkCallback(checking) {
+    const file = plugin.app.workspace.getActiveFile();
+    if (!(file instanceof TFile)) {
+      return false;
+    }
+    const card = cardFromFrontmatter(
+      file.path,
+      plugin.app.metadataCache.getFileCache(file)?.frontmatter
+    );
+    if (!card) {
+      return false;
+    }
+    if (checking) {
+      return true;
+    }
+    const name = card.names[0];
+    new ConfirmActionModal(
+      plugin.app,
+      "Delete this card",
+      `“${name}” goes to the system trash. The manuscript keeps the name where it is written.`,
+      "Delete",
+      () => {
+        void deleteBibleCard(plugin.app, file.path);
+      }
+    ).open();
   },
 });
 

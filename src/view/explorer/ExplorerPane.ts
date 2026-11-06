@@ -24,7 +24,7 @@ import NewDraftModal from "src/view/project-lifecycle/new-draft-modal";
 import { UndoManager } from "../undo/undo-manager";
 import { ignoreScene } from "./scene-menu-items";
 import { trashPiece } from "src/commands/revision";
-import { confirmDeleteProject } from "src/commands/delete-project";
+import { confirmDeleteDraft, confirmDeleteProject } from "src/commands/delete-project";
 import type ScriptoriumPlugin from "src/main";
 import { appContext } from "../utils";
 
@@ -243,15 +243,32 @@ export class ExplorerPane extends ItemView {
         menu.showAtPosition({ x, y });
       }
     );
-    context.set("showDraftMenu", (x: number, y: number, action: () => void) => {
-      const menu = new Menu();
-      menu.addItem((item) => {
-        item.setTitle("Rename");
-        item.setIcon("pencil");
-        item.onClick(action);
-      });
-      menu.showAtPosition({ x, y });
-    });
+    context.set(
+      "showDraftMenu",
+      (x: number, y: number, draft: Draft, action: () => void) => {
+        const menu = new Menu();
+        menu.addItem((item) => {
+          item.setTitle("Rename");
+          item.setIcon("pencil");
+          item.onClick(action);
+        });
+        menu.addItem((item) => {
+          item.setTitle("Delete draft");
+          item.setIcon("trash");
+          item.onClick(() => {
+            const plugin = (
+              this.app as {
+                plugins?: { getPlugin(id: string): ScriptoriumPlugin | null };
+              }
+            ).plugins?.getPlugin("scriptorium");
+            if (plugin) {
+              confirmDeleteDraft(plugin, draft);
+            }
+          });
+        });
+        menu.showAtPosition({ x, y });
+      }
+    );
     context.set("renameFolder", (oldPath: string, newPath: string) => {
       this.app.vault.adapter.rename(oldPath, newPath);
     });
@@ -305,6 +322,17 @@ export class ExplorerPane extends ItemView {
 
     context.set("showNewDraftModal", () => {
       new NewDraftModal(this.app).open();
+    });
+
+    context.set("deleteCurrentDraft", () => {
+      const draft = get(selectedDraft);
+      const plugin = (
+        this.app as { plugins?: { getPlugin(id: string): ScriptoriumPlugin | null } }
+      ).plugins?.getPlugin("scriptorium");
+      if (!draft || !plugin) {
+        return;
+      }
+      confirmDeleteDraft(plugin, draft);
     });
 
     context.set("deleteCurrentProject", () => {

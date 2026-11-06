@@ -85,6 +85,32 @@ export function projectDeletionPlan(
   return { files, folders };
 }
 
+/**
+ * What one draft may remove.
+ * A file or folder still used by another draft of the same project stays.
+ */
+export function draftRemovalPlan(
+  draft: Draft,
+  parent: string,
+  others: Draft[],
+  otherParents: Record<string, string>
+): ProjectDeletionPlan {
+  const own = projectDeletionPlan([draft], { [draft.vaultPath]: parent });
+  const kept = projectDeletionPlan(others, otherParents);
+  return {
+    files: own.files.filter((path) => kept.files.indexOf(path) < 0),
+    folders: own.folders.filter(
+      (folder) =>
+        !kept.folders.some(
+          (other) =>
+            folder === other ||
+            pathCoveredByFolder(folder, other) ||
+            pathCoveredByFolder(other, folder)
+        )
+    ),
+  };
+}
+
 export function noteOwnedByProject(frontmatter: unknown, title: string): boolean {
   if (!title || !frontmatter || typeof frontmatter !== "object") {
     return false;

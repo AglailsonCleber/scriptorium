@@ -1,8 +1,8 @@
 <script lang="ts">
   import { last } from "lodash";
-  import { normalizePath } from "obsidian";
   import { kindLabel } from "src/model/project-kind";
-import { draftForPath, projectFolderPath } from "src/model/scene-navigation";
+  import { ensureSceneFolder } from "src/model/scene-folder-vault";
+  import { draftForPath, projectFolderPath } from "src/model/scene-navigation";
   import { pluginSettings, projects } from "src/model/stores";
   import {
     drafts,
@@ -67,27 +67,35 @@ import { draftForPath, projectFolderPath } from "src/model/scene-navigation";
   });
 
   async function sceneFolderChanged(event: Event) {
-    const newFolder = (event.target as any).value;
-    if (newFolder.length <= 0 || !$selectedDraft) {
+    const input = event.target as HTMLInputElement;
+    const newFolder = input.value.trim();
+    if (
+      newFolder.length <= 0 ||
+      !$selectedDraft ||
+      $selectedDraft.format !== "scenes"
+    ) {
       return;
     }
-    const root = app.vault.getAbstractFileByPath($selectedDraft.vaultPath)
-      .parent.path;
-    const path = normalizePath(`${root}/${newFolder}`);
-    const exists = await app.vault.adapter.exists(path);
-    if (exists) {
-      drafts.update((allDrafts) =>
-        allDrafts.map((d) => {
-          if (
-            d.vaultPath === $selectedDraftVaultPath &&
-            d.format === "scenes"
-          ) {
-            d.sceneFolder = newFolder;
-          }
-          return d;
-        })
-      );
+    if (newFolder === $selectedDraft.sceneFolder) {
+      return;
     }
+    const root = projectFolderPath($selectedDraft, app.vault);
+    const ready = await ensureSceneFolder(app, root, newFolder);
+    if (!ready) {
+      input.value = $selectedDraft.sceneFolder;
+      return;
+    }
+    drafts.update((allDrafts) =>
+      allDrafts.map((d) => {
+        if (
+          d.vaultPath === $selectedDraftVaultPath &&
+          d.format === "scenes"
+        ) {
+          d.sceneFolder = newFolder;
+        }
+        return d;
+      })
+    );
   }
 
   let sceneTemplateInput: HTMLInputElement;
@@ -171,6 +179,7 @@ import { draftForPath, projectFolderPath } from "src/model/scene-navigation";
   }
 
   const showNewDraftModal: () => void = getContext("showNewDraftModal");
+  const deleteCurrentDraft: () => void = getContext("deleteCurrentDraft");
   const deleteCurrentProject: () => void = getContext("deleteCurrentProject");
   function onNewDraft() {
     showNewDraftModal();
@@ -211,9 +220,8 @@ import { draftForPath, projectFolderPath } from "src/model/scene-navigation";
               on:blur={sceneFolderChanged}
             />
             <p class="longform-project-warning">
-              Changing scene folder does not move scenes. If you’re moving
-              scenes to a new folder, move them in your vault first, then
-              change this setting.
+              An existing folder is used as it is. A folder that is not there
+              yet is created. Scenes already in the list stay where they are.
             </p>
             <label for="longform-project-scene-template">Scene Template</label
             >
@@ -300,6 +308,12 @@ import { draftForPath, projectFolderPath } from "src/model/scene-navigation";
     {/if}
   </div>
   <div class="longform-project-section">
+    <button type="button" class="mod-warning" on:click={deleteCurrentDraft}
+      >Delete draft</button
+    >
+    <p class="longform-project-warning">
+      Removes the open draft, its index, and its scenes. Other drafts stay. The bible and research shared by the project stay. If this is the only draft, the project goes with it.
+    </p>
     <button type="button" class="mod-warning" on:click={deleteCurrentProject}
       >Delete project</button
     >

@@ -24,6 +24,7 @@ Right-click a Scriptorium note and open **Insert** (**Inserir**). A **Marks** se
 | Unindent scene | Outdents the current scene one level. |
 | Insert multi-scene frontmatter | Writes multi-scene `scriptorium` frontmatter into the note. |
 | Insert single-scene frontmatter | Writes single-scene `scriptorium` frontmatter into the note. |
+| Delete this draft | Asks, then moves that draft’s index and scenes to the system trash. Other drafts stay, and so do the project’s bible and research. The only draft takes the project with it. |
 | Delete this project | Asks, then moves that project’s index, scenes, and Scriptorium folders to the system trash. |
 | Compile current project with current workflow | Compiles the selected project with its current workflow. |
 | Compile project… | Choose a project, draft, and workflow, then compile. |
@@ -32,10 +33,10 @@ Right-click a Scriptorium note and open **Insert** (**Inserir**). A **Marks** se
 
 | Name | Description |
 | --- | --- |
-| Hide note properties | Turns that setting on or off. While it is on, the properties block is hidden in editing and reading. The properties stay in the file. |
+| Hide note properties | Turns that setting on or off. While it is on, the properties block is hidden in editing and reading, on manuscript notes and on bible cards. The properties stay in the file. |
 | Toggle current line highlight | Turns **Highlight current line** on or off. The cursor line is tinted only while the setting is on. |
-| Toggle focus mode | Dims every paragraph except the one being written. |
-| Toggle first-line indent | Turns **Indent the first line** on or off. On prose and column pages, in editing and reading, the first line of each paragraph indents. A blank line starts the next paragraph. Later lines of that paragraph stay flush, and so do headings, lists, quotes, rules, fenced code, and the properties block. Verse and script stay flush. The size is **First-line indent** (0.5 to 4 em, 2 by default). The note is unchanged. |
+| Toggle focus mode | Dims every paragraph except the one being written. In prose, a line break starts the next paragraph. In a column, a blank line does. |
+| Toggle first-line indent | Turns **Indent the first line** on or off. On prose and column pages, in editing and reading, the first line of each paragraph indents. In prose, a line break starts the next paragraph. In a column, a blank line does, and later lines of that paragraph stay flush. Headings, lists, quotes, rules, fenced code, and the properties block stay flush. Verse and script stay flush. The size is **First-line indent** (0.5 to 4 em, 2 by default). The note is unchanged. |
 | Toggle typewriter mode | Keeps the cursor line centered. |
 | Set page form to prose | Prose. Novel and story, and also chronicle. |
 | Set page form to verse | Verse. Poetry. A line break belongs to the poem. |
@@ -58,6 +59,7 @@ Right-click a Scriptorium note and open **Insert** (**Inserir**). A **Marks** se
 | Insert margin note | A private margin comment, `%%? … %%`. In the editor the code stays hidden until the cursor is on it, like a link address. It does not enter the output. |
 | Insert quotes | Quotes around the selection, or an empty pair with the cursor inside. |
 | Insert missing word | A searchable `TK`. |
+| Indent this paragraph | Indents the first line of the selected paragraph only. Shown in **Insert** while **Indent the first line** is off, on prose and column pages. The distance is **First-line indent**. Verse and script do not offer it. |
 | Insert hyphen | A compound-word hyphen. Palette only. |
 | List margin notes | Gathers the private comments. |
 | Show private comments | Shows the private comments. |
@@ -82,6 +84,7 @@ Right-click a Scriptorium note and open **Insert** (**Inserir**). A **Marks** se
 | Name | Description |
 | --- | --- |
 | Open card at cursor | Opens the card for the name under the cursor. |
+| Delete this bible card | Asks, then moves the open bible card to the system trash. The manuscript keeps the name where it is written. |
 | Replace a name in the book | Replaces a name in every scene of the project. |
 
 ## Verse

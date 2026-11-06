@@ -33,15 +33,15 @@
  * loses to that rule, so the block stays on screen while typing.
  * Source mode shows the same data as frontmatter lines, not the block.
  */
-.longform-leaf.longform-hide-properties,
-.longform-leaf.longform-hide-properties .markdown-source-view,
-.longform-leaf.longform-hide-properties .markdown-reading-view {
+.longform-hide-properties,
+.longform-hide-properties .markdown-source-view,
+.longform-hide-properties .markdown-reading-view {
   --metadata-display-reading: none;
   --metadata-display-editing: none;
 }
 
-.longform-leaf.longform-hide-properties .metadata-container,
-.longform-leaf.longform-hide-properties .cm-line:has(.cm-hmd-frontmatter) {
+.longform-hide-properties .metadata-container,
+.longform-hide-properties .cm-line:has(.cm-hmd-frontmatter) {
   display: none;
 }
 
