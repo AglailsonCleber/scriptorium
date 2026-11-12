@@ -1,6 +1,6 @@
 {
   "name": "scriptorium",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Write a novel, a poem, a story, a chronicle, or a script in Obsidian. Based on Longform.",
   "main": "main.js",
   "scripts": {
